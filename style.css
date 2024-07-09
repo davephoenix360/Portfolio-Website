@@ -433,3 +433,67 @@ footer {
 footer p {
     text-align: center;
 }
+
+/*Achievements Section*/
+
+#achievements {
+    position: relative;
+}
+
+.achievements-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.achievements-years {
+    width: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: right;
+}
+
+.achievements-years ul {
+    width: min-content;
+    list-style: none;
+}
+
+.achievements-years ul li {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.achievements-years ul li p {
+    color: rgb(163,163,163);
+}
+
+.year-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+.year-line span:first-child {
+    background-color: rgb(163,163,163);
+    display: block;
+    width: 0.2rem;
+    height: 1rem;
+}
+
+.achievements-years .selected-year span:first-child {
+    background-color: black;
+}
+
+.achievements-years .selected-year p {
+    color: black;
+    font-size: 2rem;
+}
+
+.achievements-desc {
+    width: 80%;
+    text-align: left;
+}

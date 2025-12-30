@@ -5,23 +5,83 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Languages & Core',
-    items: ['TypeScript', 'Python', 'Go', 'Java', 'C#', 'SQL', 'Kotlin'],
+    title: 'Programming Languages',
+    items: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C', 'C++', 'C#', 'SQL', 'Bash'],
   },
+
   {
-    title: 'Backend & Cloud',
-    items: ['Node.js', 'FastAPI', 'Prisma/ORMs', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes'],
+    title: 'Backend & Systems',
+    items: [
+      'Node.js',
+      'FastAPI',
+      'REST API Design',
+      'Authentication & Authorization',
+      'PostgreSQL',
+      'MySQL',
+      'SQLite',
+      'Linux',
+      'Concurrency & Synchronization',
+      'Virtual Memory Concepts',
+    ],
   },
+
   {
-    title: 'AI & Data',
-    items: ['LangChain', 'Vector Stores', 'OpenAI API', 'Data Pipelines', 'Feature Flags'],
+    title: 'AI / ML & Data',
+    items: [
+      'Large Language Models (LLMs)',
+      'LangChain',
+      'Retrieval-Augmented Generation (RAG)',
+      'Hugging Face Transformers',
+      'PyTorch',
+      'scikit-learn',
+      'NLP Pipelines',
+      'Model Evaluation (Precision / Recall / F1)',
+      'Data Processing (Pandas, NumPy)',
+    ],
   },
+
   {
     title: 'Frontend & Mobile',
-    items: ['React', 'Next.js (static export)', 'Tailwind CSS', 'React Query', 'Android', 'Unity'],
+    items: ['React', 'Next.js', 'HTML', 'CSS', 'Tailwind CSS', 'Android (Java)', 'Unity'],
   },
+
   {
-    title: 'DevOps & Quality',
-    items: ['CI/CD', 'Testing (unit/integration/contract)', 'Observability', 'IaC templates', 'GitHub Actions'],
+    title: 'Cloud, DevOps & Tooling',
+    items: [
+      'AWS Lambda',
+      'Google Cloud APIs',
+      'Firebase (Firestore, Storage)',
+      'Docker',
+      'Git & GitHub',
+      'GitHub Actions',
+      'CI/CD Pipelines',
+      'Linux-based Development',
+    ],
+  },
+
+  {
+    title: 'Testing & Quality',
+    items: [
+      'Unit Testing',
+      'Integration Testing',
+      'UI Testing',
+      'JUnit',
+      'Espresso',
+      'Test Automation',
+      'Debugging & Instrumentation',
+    ],
+  },
+
+  {
+    title: 'Developer Tools & Platforms',
+    items: [
+      'Chrome Extensions (Manifest V3)',
+      'WordPress / PHP',
+      'Google Apps Script',
+      'Android Studio',
+      'Firebase Console',
+      'Vercel',
+      'Netlify',
+    ],
   },
 ];

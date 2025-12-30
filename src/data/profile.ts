@@ -7,6 +7,7 @@ export type Profile = {
   name: string;
   headline: string;
   tagline: string;
+  availability?: string;
   location: string;
   email: string;
   resumeUrl: string;
@@ -17,18 +18,28 @@ export type Profile = {
 
 export const profile: Profile = {
   name: 'Diepreye Charles-Daniel',
-  headline: 'Software Engineering Co-op student · University of Alberta',
-  tagline: 'AI / Backend / DevOps / Full-Stack — shipping reliable systems with clean architecture.',
+
+  headline: 'Software Engineering Co-op Student · University of Alberta',
+
+  tagline:
+    'AI / Backend / DevOps / Full-Stack — building reliable systems with clean architecture and strong engineering fundamentals.',
+  
+  availability: 'Available for Summer 2026 internships (8-month term)',
+
   location: 'Edmonton, AB · Open to Summer 2026 internships',
-  email: 'hello@diepreyecd.dev', // TODO: replace with your preferred inbox
-  resumeUrl: '/assets/Resume.pdf', // TODO: update if you have a newer resume
+
+  email: 'davediepreye05@gmail.com', // update if you prefer a different inbox
+
+  resumeUrl: '/assets/Resume.pdf',
+
   aboutShort:
-    'I build resilient, testable systems that balance developer experience with production reliability.',
+    'I design and ship resilient, testable software with an emphasis on clarity, automation, and production readiness.',
+
   aboutLong:
-    "I'm driven by clean architecture, automation, and thoughtful developer tooling. My recent work spans AI-backed features, backend services, DevOps pipelines, and full-stack product iterations. I enjoy shipping fast without sacrificing code quality or observability.",
+    "I'm a Software Engineering Co-op student focused on backend systems, DevOps workflows, and AI-enabled features. My recent work spans full-stack products, cloud-integrated services, and automation pipelines, with a strong emphasis on maintainability, testing, and observability. I enjoy owning features end-to-end and shipping quickly without compromising code quality.",
+
   socials: [
     { label: 'GitHub', href: 'https://github.com/davephoenix360' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/diepreyecd' }, // TODO: confirm URL
-    { label: 'Twitter', href: 'https://x.com/diepreyecd' }, // TODO: confirm handle
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/diepreyecd' },
   ],
 };

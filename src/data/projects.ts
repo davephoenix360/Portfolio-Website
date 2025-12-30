@@ -16,56 +16,141 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  // ===============================
+  // Flagship Projects
+  // ===============================
   {
     id: 'nextep',
     title: 'Nextep',
-    summary: 'Resume builder + Chrome extension ecosystem for rapid job-ready profiles.',
+    summary: 'Resume builder + job-application tooling to streamline job-ready profiles.',
     description:
-      'Built an extensible resume builder with content blocks, autosave, and a companion Chrome extension for capturing achievements on the fly. Added PDF export, accessible templates, and analytics to learn what resonates.',
-    tags: ['AI', 'Backend', 'Frontend'],
-    tech: ['TypeScript', 'React', 'Node.js', 'Prisma', 'PostgreSQL', 'Chrome APIs'],
+      'Building a resume builder with reusable content blocks and clean templates, plus a companion Chrome extension to capture job postings and application details. Designed for fast iteration, structured data, and future AI-assisted scoring and tailoring.',
+    tags: ['Full-Stack', 'Frontend', 'Backend', 'Tooling'],
+    tech: ['TypeScript', 'React', 'Next.js', 'Chrome Extension (MV3)'],
     links: [
-      { label: 'GitHub', href: 'https://github.com/davephoenix360' },
-      { label: 'Demo', href: 'https://diepreyecd.dev' }, // TODO: swap demo link
+      { label: 'GitHub', href: 'https://github.com/davephoenix360/nextep' },
+      { label: 'GitHub', href: 'https://github.com/davephoenix360/nextep-extension' },
     ],
-    image: '/assets/project-1.png',
+    image: '/assets/Nextep Full Logo (1).png',
     status: 'Iterating',
   },
+
   {
     id: 'ace-budget-ai',
     title: 'Ace Budget AI',
-    summary: 'AI-powered budgeting coach that personalizes spending nudges.',
+    summary: 'AI-powered budgeting assistant for expense tracking and personalized insights.',
     description:
-      'Prototyped an AI spending assistant that connects to banking exports, classifies expenses, and runs goal-aware recommendations. Delivered a conversational UI with guardrails, transparency, and exportable reports.',
-    tags: ['AI', 'Backend'],
-    tech: ['Python', 'FastAPI', 'PostgreSQL', 'LangChain', 'TypeScript'],
-    links: [{ label: 'GitHub', href: 'https://github.com/davephoenix360' }],
-    image: '/assets/project-2.png',
+      'Prototyped an AI budgeting workflow that ingests transaction exports, categorizes spending, and generates goal-aware summaries and recommendations. Designed with transparency, extensibility, and future forecasting features in mind.',
+    tags: ['AI', 'Backend', 'Full-Stack', 'Team Project', 'Hackathon'],
+    tech: ['Python', 'TypeScript', 'React', 'NLP / LLM APIs'],
+    links: [{ label: 'GitHub', href: 'https://github.com/davephoenix360/ace_budget_ai' }],
+    image: '/assets/Ace Budget AI.png',
     status: 'Prototype',
   },
+
   {
     id: 'streamer-university',
     title: 'Streamer University',
-    summary: 'Unity-built narrative sim exploring growth, community, and creative hustle.',
+    summary: 'Unity narrative + stats game with modular event-card and minigame systems.',
     description:
-      'Developed game loops, dialogue trees, and modular systems to experiment with pacing and player agency. Focused on polish, save-state reliability, and performant animation triggers.',
-    tags: ['Game Dev', 'Frontend'],
-    tech: ['Unity', 'C#', 'Cinemachine'],
-    links: [{ label: 'Demo', href: 'https://diepreyecd.dev' }], // TODO: update demo link
-    image: '/assets/project-3.png',
-    status: 'Beta',
+      'Built a 2D visual-novel-style stats management game in Unity with an event-card system supporting branching outcomes, flags, and fame/stress deltas. Integrated multiple minigames into the progression loop and shipped a polished gold release with a multi-developer team.',
+    tags: ['Game Dev', 'Systems', 'Team Project', 'School Project'],
+    tech: ['Unity', 'C#', 'JSON / CSV', 'Git'],
+    links: [
+      { label: 'Play', href: 'https://diepreyecdd.itch.io/streamer-university' },
+      { label: 'Trailer', href: 'https://youtu.be/DNCXtjDrRYQ' },
+      { label: 'GitHub', href: 'https://github.com/DIEPREYECD/CMPUT-250-Project' },
+    ],
+    image: '/assets/Streamer University.png',
+    status: 'Shipped',
   },
+
   {
     id: 'fairdraw',
     title: 'FairDraw',
-    summary: 'Android app with Firebase, QR, and geolocation to run equitable raffles.',
+    summary: 'Multi-role Android app for event lotteries with QR flows and Firebase.',
     description:
-      'Built a mobile raffle experience with secure QR codes, geofencing, and auditable draws. Added Firebase sync, offline persistence, and admin dashboards for transparency.',
-    tags: ['Mobile', 'Backend'],
-    tech: ['Kotlin', 'Firebase', 'Cloud Functions', 'Maps SDK'],
-    links: [{ label: 'GitHub', href: 'https://github.com/davephoenix360' }],
-    image: '/assets/web-calc-proj-pic.jpg',
+      'Built a multi-role Android application (Entrant / Organizer / Admin) supporting event creation, waitlists, and lottery-based selection workflows. Integrated Firebase Firestore and Storage, implemented QR-based flows, and validated core user journeys with Espresso and JUnit tests.',
+    tags: ['Mobile', 'Backend', 'Testing', 'Team Project', 'School Project'],
+    tech: ['Android (Java)', 'Firebase Firestore', 'Firebase Storage', 'Espresso', 'JUnit'],
+    links: [{ label: 'GitHub', href: 'https://github.com/CMPUT301f25Orchid/Project' }],
+    image: '/assets/FairDraw.png',
     status: 'Shipped',
+  },
+
+  // ===============================
+  // Systems / AI / Academic Projects
+  // ===============================
+  {
+    id: 'os-labs',
+    title: 'Operating Systems Labs (CMPUT 379)',
+    summary: 'Low-level OS components, concurrency, and virtual memory simulations in C.',
+    description:
+      'Implemented core operating system concepts in C under Linux, including process and thread abstractions, synchronization primitives, and virtual memory simulations. Analyzed correctness and performance trade-offs through systematic testing.',
+    tags: ['Systems', 'Concurrency', 'Low-Level', 'School Project'],
+    tech: ['C', 'Linux', 'Semaphores', 'Mutexes', 'CAS', 'Virtual Memory'],
+    links: [{ label: 'GitHub', href: 'https://github.com/DIEPREYECD/CMPUT-379' }],
+    status: 'Completed',
+  },
+
+  {
+    id: 'bullying-classifier',
+    title: 'Bullying Classifier Model',
+    summary: 'BERT-based NLP model for detecting bullying and harmful language.',
+    description:
+      'Fine-tuned a BERT-based NLP classifier to detect bullying in social media text. Built evaluation pipelines with precision, recall, and F1-score, and designed the architecture for real-time and multi-modal extensions.',
+    tags: ['AI', 'NLP', 'ML', 'Team Project', 'Hackathon'],
+    tech: ['PyTorch', 'Hugging Face Transformers', 'scikit-learn', 'Pandas', 'NumPy'],
+    links: [{ label: 'Model', href: 'https://huggingface.co/Davephoenix/bert-bullying-detector' }],
+    status: 'Completed',
+  },
+
+  {
+    id: 'lookmate',
+    title: 'LookMate',
+    summary: 'AI-powered style assistant with weather-aware outfit recommendations.',
+    description:
+      'Built a personalized style assistant using React and Next.js, integrating OpenAI APIs and AWS Lambda to generate outfit recommendations. Deployed on Vercel with cloud-backed services.',
+    tags: ['AI', 'Full-Stack', 'Team Project'],
+    tech: ['React', 'Next.js', 'TypeScript', 'OpenAI API', 'AWS Lambda', 'Vercel'],
+    links: [{ label: 'GitHub', href: 'https://github.com/boxerarakelyan777/LookMate' }],
+    status: 'Completed',
+  },
+
+  {
+    id: 'memorix-ai',
+    title: 'MemorixAI',
+    summary: 'AI-powered flashcard web app using RAG and LLM APIs.',
+    description:
+      'Built an AI-powered flashcard application using Llama 3 via Groq, handling backend APIs and multi-modal input features. Applied RAG techniques using LangChain to improve learning relevance.',
+    tags: ['AI', 'Full-Stack', 'RAG', 'Team Project'],
+    tech: ['React', 'Next.js', 'TypeScript', 'LangChain', 'Groq API', 'Firebase'],
+    links: [{ label: 'GitHub', href: 'https://github.com/boxerarakelyan777/MemorixAI' }],
+    status: 'Completed',
+  },
+
+  {
+    id: 'keepr',
+    title: 'Keepr',
+    summary: 'Smart pantry management app with AI-generated recipes.',
+    description:
+      'Developed a pantry management web app using Firebase for storage and OpenAI-powered recipe generation based on available ingredients.',
+    tags: ['AI', 'Full-Stack'],
+    tech: ['React', 'Next.js', 'TypeScript', 'Firebase', 'OpenAI API'],
+    links: [{ label: 'GitHub', href: 'https://github.com/davephoenix360/keepr' }],
+    status: 'Completed',
+  },
+
+  {
+    id: 'guide-bot',
+    title: 'Guide Bot',
+    summary: 'Arduino-powered navigation robot for visually impaired users.',
+    description:
+      'Led a team to build an Arduino-based guide robot using Python and C++. Implemented outdoor navigation using Google Maps and OpenRouteService APIs to support precise movement between saved locations.',
+    tags: ['Robotics', 'Systems', 'Embedded', 'Team Project', 'Hackathon'],
+    tech: ['Python', 'C++', 'Arduino', 'Google Maps API', 'OpenRouteService API'],
+    links: [{ label: 'Devpost', href: 'https://devpost.com/software/hacked-2024' }],
+    status: 'Completed',
   },
 ];
 

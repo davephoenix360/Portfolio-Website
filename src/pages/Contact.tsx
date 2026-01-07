@@ -6,9 +6,9 @@ import { GithubIcon, LinkedInIcon, MailIcon } from '../components/icons';
 const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = async () => {
+  const handleCopy = async (email: string) => {
     try {
-      await navigator.clipboard.writeText(profile.email);
+      await navigator.clipboard.writeText(email);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch (err) {
@@ -31,18 +31,30 @@ const Contact: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-slate-800 dark:text-slate-100">
               <MailIcon />
-              {profile.email}
+              {profile.emailPersonal}
             </div>
             <button
-              onClick={handleCopy}
+              onClick={() => handleCopy(profile.emailPersonal)}
+              className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-accent"
+            >
+              {copied ? 'Copied!' : 'Copy email'}
+            </button>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+              <MailIcon />
+              {profile.emailSchool}
+            </div>
+            <button
+              onClick={() => handleCopy(profile.emailSchool)}
               className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-accent"
             >
               {copied ? 'Copied!' : 'Copy email'}
             </button>
           </div>
           <p className="text-base text-slate-700 dark:text-slate-200">
-            Please include context about timelines, team size, and the problems you want solved. I respond
-            quickly to concise notes.
+            Please include context about timelines, team size, and the problems you want solved. I
+            respond quickly to concise notes.
           </p>
         </div>
 
@@ -69,7 +81,13 @@ const Contact: React.FC = () => {
             </a>
           </div>
           <div className="rounded-2xl border border-slate-200/70 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-800/70 dark:bg-slate-900/70 dark:text-slate-200">
-            Prefer direct scheduling? Add a calendar link here. {/* TODO: replace with scheduling link */}
+            {/* Calendly Landing Page */}
+            <iframe
+              src="https://calendly.com/diepreye-ualberta"
+              width="100%"
+              height="400"
+              frameBorder="0"
+            ></iframe>
           </div>
         </div>
       </div>

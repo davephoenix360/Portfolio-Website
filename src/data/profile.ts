@@ -9,7 +9,8 @@ export type Profile = {
   tagline: string;
   availability?: string;
   location: string;
-  email: string;
+  emailPersonal: string;
+  emailSchool: string;
   resumeUrl: string;
   aboutShort: string;
   aboutLong: string;
@@ -23,12 +24,14 @@ export const profile: Profile = {
 
   tagline:
     'AI / Backend / DevOps / Full-Stack — building reliable systems with clean architecture and strong engineering fundamentals.',
-  
+
   availability: 'Available for Summer 2026 internships (8-month term)',
 
   location: 'Edmonton, AB · Open to Summer 2026 internships',
 
-  email: 'davediepreye05@gmail.com', // update if you prefer a different inbox
+  emailPersonal: 'davediepreye05@gmail.com',
+
+  emailSchool: 'diepreye@ualberta.ca', // university email
 
   resumeUrl: '/assets/Resume.pdf',
 

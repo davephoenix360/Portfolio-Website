@@ -43,6 +43,7 @@ export const profile: Profile = {
 
   socials: [
     { label: 'GitHub', href: 'https://github.com/davephoenix360' },
+    { label: 'GitHub_School', href: 'https://github.com/DIEPREYECD' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/diepreyecd' },
   ],
 };

@@ -72,6 +72,15 @@ const Contact: React.FC = () => {
             </a>
             <a
               className="pill inline-flex items-center gap-2"
+              href={profile.socials.find((s) => s.label === 'GitHub_School')?.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <GithubIcon />
+              School GitHub
+            </a>
+            <a
+              className="pill inline-flex items-center gap-2"
               href={profile.socials.find((s) => s.label === 'LinkedIn')?.href}
               target="_blank"
               rel="noreferrer"

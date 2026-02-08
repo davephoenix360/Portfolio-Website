@@ -13,6 +13,10 @@ export type Project = {
   links: ProjectLink[];
   image?: string;
   status?: string;
+  featured?: boolean;
+  impact?: string[];
+  whatIDid?: string[];
+  tradeoffs?: string;
 };
 
 export const projects: Project[] = [
@@ -31,8 +35,20 @@ export const projects: Project[] = [
       { label: 'GitHub', href: 'https://github.com/davephoenix360/nextep' },
       { label: 'GitHub', href: 'https://github.com/davephoenix360/nextep-extension' },
     ],
-    image: '/assets/Nextep Full Logo (1).png',
+    image: '/projects/nextep.png',
     status: 'Iterating',
+    featured: true,
+    impact: [
+      'Accelerated resume iteration with modular content blocks and templates.',
+      'Captured job postings quickly with an extension-driven intake flow.',
+      'Laid the groundwork for AI-assisted scoring and tailoring.',
+    ],
+    whatIDid: [
+      'Designed the structured resume data model and template system.',
+      'Built the Chrome extension for job capture and metadata sync.',
+      'Outlined evaluation criteria for future AI scoring workflows.',
+    ],
+    tradeoffs: 'Optimized for rapid iteration and extensibility; full automation waits for stable schemas.',
   },
 
   {
@@ -44,8 +60,19 @@ export const projects: Project[] = [
     tags: ['AI', 'Backend', 'Full-Stack', 'Team Project', 'Hackathon'],
     tech: ['Python', 'TypeScript', 'React', 'NLP / LLM APIs'],
     links: [{ label: 'GitHub', href: 'https://github.com/davephoenix360/ace_budget_ai' }],
-    image: '/assets/Ace Budget AI.png',
+    image: '/projects/ace-budget-ai.png',
     status: 'Prototype',
+    impact: [
+      'Automated categorization of transaction exports for fast budget insights.',
+      'Generated goal-aware summaries to highlight spending patterns.',
+      'Delivered a prototype workflow ready for forecasting extensions.',
+    ],
+    whatIDid: [
+      'Built the ingestion pipeline for CSV exports and normalization.',
+      'Implemented LLM-assisted categorization with readable explanations.',
+      'Shaped the UI for budget snapshots and alerts.',
+    ],
+    tradeoffs: 'Prioritized explainability and auditability over aggressive automation.',
   },
 
   {
@@ -61,8 +88,20 @@ export const projects: Project[] = [
       { label: 'Trailer', href: 'https://youtu.be/DNCXtjDrRYQ' },
       { label: 'GitHub', href: 'https://github.com/DIEPREYECD/CMPUT-250-Project' },
     ],
-    image: '/assets/Streamer University.png',
+    image: '/projects/streamer-university.png',
     status: 'Shipped',
+    featured: true,
+    impact: [
+      'Shipped a polished gold release with a multi-developer team.',
+      'Delivered a branching narrative system with tunable outcomes.',
+      'Integrated minigames into the progression loop.',
+    ],
+    whatIDid: [
+      'Implemented the event-card system and stat deltas.',
+      'Built minigame hooks and progression balancing.',
+      'Coordinated asset integration and bug triage.',
+    ],
+    tradeoffs: 'Focused on a 2D pipeline for reliable performance and fast iteration.',
   },
 
   {
@@ -74,8 +113,20 @@ export const projects: Project[] = [
     tags: ['Mobile', 'Backend', 'Testing', 'Team Project', 'School Project'],
     tech: ['Android (Java)', 'Firebase Firestore', 'Firebase Storage', 'Espresso', 'JUnit'],
     links: [{ label: 'GitHub', href: 'https://github.com/CMPUT301f25Orchid/Project' }],
-    image: '/assets/FairDraw.png',
+    image: '/projects/fairdraw.png',
     status: 'Shipped',
+    featured: true,
+    impact: [
+      'Streamlined event lotteries with multi-role flows.',
+      'Enabled QR-based check-in and selection workflows.',
+      'Validated core journeys with automated tests.',
+    ],
+    whatIDid: [
+      'Designed the Firestore schema for organizers, entrants, and admins.',
+      'Built QR flows plus Firebase Storage integration.',
+      'Wrote Espresso and JUnit tests for key paths.',
+    ],
+    tradeoffs: 'Optimized core workflows first; push notifications and analytics were deferred.',
   },
 
   // ===============================
@@ -90,7 +141,17 @@ export const projects: Project[] = [
     tags: ['Systems', 'Concurrency', 'Low-Level', 'School Project'],
     tech: ['C', 'Linux', 'Semaphores', 'Mutexes', 'CAS', 'Virtual Memory'],
     links: [{ label: 'GitHub', href: 'https://github.com/DIEPREYECD/CMPUT-379' }],
+    image: '/projects/placeholder.svg',
     status: 'Completed',
+    impact: [
+      'Implemented OS primitives under concurrency and memory constraints.',
+      'Measured correctness and performance tradeoffs through repeatable tests.',
+    ],
+    whatIDid: [
+      'Built process/thread abstractions and synchronization primitives.',
+      'Implemented virtual memory simulations and benchmarks.',
+    ],
+    tradeoffs: 'Prioritized correctness and clarity over micro-optimizations.',
   },
 
   {
@@ -102,7 +163,18 @@ export const projects: Project[] = [
     tags: ['AI', 'NLP', 'ML', 'Team Project', 'Hackathon'],
     tech: ['PyTorch', 'Hugging Face Transformers', 'scikit-learn', 'Pandas', 'NumPy'],
     links: [{ label: 'Model', href: 'https://huggingface.co/Davephoenix/bert-bullying-detector' }],
+    image: '/projects/placeholder.svg',
     status: 'Completed',
+    impact: [
+      'Improved detection precision with BERT fine-tuning.',
+      'Created evaluation pipelines for precision, recall, and F1.',
+    ],
+    whatIDid: [
+      'Prepared the dataset and tokenization pipeline.',
+      'Fine-tuned the model and reported metrics.',
+      'Explored deployment paths for real-time inference.',
+    ],
+    tradeoffs: 'Focused on text-only signals; multi-modal inputs were deferred.',
   },
 
   {
@@ -114,7 +186,17 @@ export const projects: Project[] = [
     tags: ['AI', 'Full-Stack', 'Team Project'],
     tech: ['React', 'Next.js', 'TypeScript', 'OpenAI API', 'AWS Lambda', 'Vercel'],
     links: [{ label: 'GitHub', href: 'https://github.com/boxerarakelyan777/LookMate' }],
+    image: '/projects/placeholder.svg',
     status: 'Completed',
+    impact: [
+      'Generated personalized outfit recommendations with weather context.',
+      'Delivered a full-stack flow from prompt to suggestion.',
+    ],
+    whatIDid: [
+      'Built the Next.js UI and serverless API integrations.',
+      'Connected OpenAI API and Lambda for the recommendation flow.',
+    ],
+    tradeoffs: 'Kept rule-based guardrails minimal to move quickly.',
   },
 
   {
@@ -126,7 +208,17 @@ export const projects: Project[] = [
     tags: ['AI', 'Full-Stack', 'RAG', 'Team Project'],
     tech: ['React', 'Next.js', 'TypeScript', 'LangChain', 'Groq API', 'Firebase'],
     links: [{ label: 'GitHub', href: 'https://github.com/boxerarakelyan777/MemorixAI' }],
+    image: '/projects/placeholder.svg',
     status: 'Completed',
+    impact: [
+      'Improved flashcard relevance with RAG-assisted generation.',
+      'Supported multi-modal inputs for study sessions.',
+    ],
+    whatIDid: [
+      'Built the API layer and integrated LangChain pipelines.',
+      'Implemented retrieval flow using Groq Llama 3.',
+    ],
+    tradeoffs: 'Optimized for accuracy; real-time collaboration was deferred.',
   },
 
   {
@@ -138,7 +230,17 @@ export const projects: Project[] = [
     tags: ['AI', 'Full-Stack'],
     tech: ['React', 'Next.js', 'TypeScript', 'Firebase', 'OpenAI API'],
     links: [{ label: 'GitHub', href: 'https://github.com/davephoenix360/keepr' }],
+    image: '/projects/placeholder.svg',
     status: 'Completed',
+    impact: [
+      'Reduced pantry planning friction with AI recipe generation.',
+      'Centralized ingredient tracking with Firebase.',
+    ],
+    whatIDid: [
+      'Built the React UI and Firebase data layer.',
+      'Integrated OpenAI API for recipe suggestions.',
+    ],
+    tradeoffs: 'Scoped to core pantry flows; grocery integrations were deferred.',
   },
 
   {
@@ -150,7 +252,17 @@ export const projects: Project[] = [
     tags: ['Robotics', 'Systems', 'Embedded', 'Team Project', 'Hackathon'],
     tech: ['Python', 'C++', 'Arduino', 'Google Maps API', 'OpenRouteService API'],
     links: [{ label: 'Devpost', href: 'https://devpost.com/software/hacked-2024' }],
+    image: '/projects/placeholder.svg',
     status: 'Completed',
+    impact: [
+      'Demonstrated navigation assistance for visually impaired users.',
+      'Integrated routing APIs for outdoor path planning.',
+    ],
+    whatIDid: [
+      'Implemented route planning with mapping APIs.',
+      'Coordinated hardware and software integration on Arduino.',
+    ],
+    tradeoffs: 'Prototype optimized for outdoor navigation; indoor SLAM was deferred.',
   },
 ];
 

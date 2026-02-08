@@ -1,12 +1,15 @@
 import { useMemo, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/SectionHeader';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
+import { fadeUp, staggerContainer } from '../components/motion';
 import { projectTags, projects, Project } from '../data/projects';
 
 const Projects: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<string>('All');
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const reducedMotion = useReducedMotion();
 
   const filtered = useMemo(() => {
     if (selectedTag === 'All') return projects;
@@ -14,7 +17,12 @@ const Projects: React.FC = () => {
   }, [selectedTag]);
 
   return (
-    <section className="section-shell">
+    <motion.section
+      className="section-shell"
+      variants={staggerContainer(reducedMotion)}
+      initial="hidden"
+      animate="show"
+    >
       <SectionHeader
         eyebrow="Projects"
         title="Systems and products I've been building"
@@ -40,14 +48,31 @@ const Projects: React.FC = () => {
         }
       />
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {filtered.map((project) => (
-          <ProjectCard key={project.id} project={project} onOpen={setActiveProject} />
-        ))}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {filtered.map((project, index) => {
+          const isFeatured = project.featured ?? (selectedTag === 'All' && index === 0);
+          return (
+            <motion.div
+              key={project.id}
+              variants={fadeUp(reducedMotion)}
+              className={isFeatured ? 'lg:col-span-2' : ''}
+            >
+              <ProjectCard project={project} onOpen={setActiveProject} featured={isFeatured} />
+            </motion.div>
+          );
+        })}
       </div>
 
-      {activeProject && <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />}
-    </section>
+      <AnimatePresence>
+        {activeProject && (
+          <ProjectModal
+            key={activeProject.id}
+            project={activeProject}
+            onClose={() => setActiveProject(null)}
+          />
+        )}
+      </AnimatePresence>
+    </motion.section>
   );
 };
 

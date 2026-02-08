@@ -1,4 +1,6 @@
+import { motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/SectionHeader';
+import { fadeUp, staggerContainer } from '../components/motion';
 import { profile } from '../data/profile';
 
 const About: React.FC = () => {
@@ -23,15 +25,22 @@ const About: React.FC = () => {
     'Practicing systems fundamentals (Linux, concurrency, and backend design) with production-style constraints.',
   ];
 
+  const reducedMotion = useReducedMotion();
+
   return (
-    <section className="section-shell">
+    <motion.section
+      className="section-shell"
+      variants={staggerContainer(reducedMotion)}
+      initial="hidden"
+      animate="show"
+    >
       <SectionHeader
         eyebrow="About"
         title="The person behind the work"
         description={profile.aboutShort}
       />
 
-      <div className="card-surface grid gap-8 p-6 md:grid-cols-[1fr_1.1fr]">
+      <motion.div variants={fadeUp(reducedMotion)} className="card-surface grid gap-8 p-6 md:grid-cols-[1fr_1.1fr]">
         <div className="space-y-4">
           <div className="text-xl font-semibold">Hi, I'm {profile.name}</div>
 
@@ -71,8 +80,8 @@ const About: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

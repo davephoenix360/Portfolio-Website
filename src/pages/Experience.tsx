@@ -1,16 +1,28 @@
+import { motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/SectionHeader';
+import { fadeUp, staggerContainer } from '../components/motion';
 import { experiences } from '../data/experience';
 
 const Experience: React.FC = () => {
+  const reducedMotion = useReducedMotion();
+
   return (
-    <section className="section-shell">
+    <motion.section
+      className="section-shell"
+      variants={staggerContainer(reducedMotion)}
+      initial="hidden"
+      animate="show"
+    >
       <SectionHeader
         eyebrow="Experience"
         title="Where I've been focusing"
         description="Highlights from roles, projects, and mentorship that shaped how I build and collaborate."
       />
 
-      <div className="relative mt-4 space-y-6 border-l border-slate-200 pl-6 dark:border-slate-800">
+      <motion.div
+        variants={fadeUp(reducedMotion)}
+        className="relative mt-4 space-y-6 border-l border-slate-200 pl-6 dark:border-slate-800"
+      >
         {experiences.map((item) => (
           <div key={`${item.company}-${item.period}`} className="card-surface ml-[-6px] p-5">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -33,8 +45,8 @@ const Experience: React.FC = () => {
             </ul>
           </div>
         ))}
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

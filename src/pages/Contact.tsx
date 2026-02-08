@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/SectionHeader';
+import { fadeUp, staggerContainer } from '../components/motion';
 import { profile } from '../data/profile';
 import { GithubIcon, LinkedInIcon, MailIcon } from '../components/icons';
 
 const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   const handleCopy = async (email: string) => {
     try {
@@ -18,14 +21,22 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="section-shell">
+    <motion.section
+      className="section-shell"
+      variants={staggerContainer(reducedMotion)}
+      initial="hidden"
+      animate="show"
+    >
       <SectionHeader
         eyebrow="Contact"
         title="Let's build something useful"
         description="If you have an internship opportunity, interesting problem, or you just want to talk about AI systems, feel free to reach out."
       />
 
-      <div className="card-surface grid gap-6 p-6 sm:grid-cols-[1.2fr_1fr]">
+      <motion.div
+        variants={fadeUp(reducedMotion)}
+        className="card-surface grid gap-6 p-6 sm:grid-cols-[1.2fr_1fr]"
+      >
         <div className="space-y-4">
           <div className="text-sm uppercase tracking-[0.25em] text-slate-500">Email</div>
           <div className="flex flex-wrap items-center gap-3">
@@ -99,8 +110,8 @@ const Contact: React.FC = () => {
             ></iframe>
           </div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

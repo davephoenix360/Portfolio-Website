@@ -25,7 +25,7 @@ export const profile: Profile = {
   tagline:
     'AI / Backend / DevOps / Full-Stack — building reliable systems with clean architecture and strong engineering fundamentals.',
 
-  availability: 'Available for Summer 2026 internships (8-month term)',
+  availability: 'Available for Full-Time Software Engineering Roles starting Summer 2027',
 
   location: 'Edmonton, AB · Open to Summer 2026 internships',
 

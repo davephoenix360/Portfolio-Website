@@ -27,7 +27,7 @@ export const profile: Profile = {
 
   availability: 'Available for Full-Time Software Engineering Roles starting Summer 2027',
 
-  location: 'Edmonton, AB · Open to Summer 2026 internships',
+  location: 'Edmonton, AB',
 
   emailPersonal: 'davediepreye05@gmail.com',
 

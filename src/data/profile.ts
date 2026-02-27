@@ -33,7 +33,7 @@ export const profile: Profile = {
 
   emailSchool: 'diepreye@ualberta.ca', // university email
 
-  resumeUrl: '/assets/Resume.pdf',
+  resumeUrl: 'https://www.overleaf.com/read/xczvtpbcwddz#bb4705',
 
   aboutShort:
     'I design and ship resilient, testable software with an emphasis on clarity, automation, and production readiness.',

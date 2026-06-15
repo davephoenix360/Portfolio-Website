@@ -8,11 +8,11 @@ const ThemeToggle: React.FC = () => {
     <button
       type="button"
       onClick={toggleTheme}
-      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-ink dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+      className="inline-flex items-center gap-2 rounded-full border border-vault/30 bg-parchment px-3 py-2 font-mono text-xs uppercase tracking-wider text-vault shadow-sm transition hover:-translate-y-0.5 hover:border-gold hover:text-goldInk dark:border-gold/30 dark:bg-vaultInk dark:text-parchment dark:hover:border-goldSoft dark:hover:text-goldSoft"
       aria-label="Toggle color mode"
     >
       {theme === 'light' ? <MoonIcon /> : <SunIcon />}
-      <span className="hidden sm:inline">{theme === 'light' ? 'Dark' : 'Light'} mode</span>
+      <span className="hidden sm:inline">{theme === 'light' ? 'Vault' : 'Parchment'}</span>
     </button>
   );
 };

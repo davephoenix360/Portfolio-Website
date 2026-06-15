@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 
 const Layout: React.FC = () => {
   return (
-    <div className="min-h-screen bg-background text-ink dark:bg-slate-950 dark:text-slate-100">
+    <div className="min-h-screen bg-parchment text-ink dark:bg-vaultInk dark:text-parchment">
       <Navbar />
       <main className="pb-16">
         <Outlet />

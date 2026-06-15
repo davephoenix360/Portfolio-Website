@@ -7,22 +7,44 @@ type Props = {
   title: string;
   description?: string;
   actions?: React.ReactNode;
+  /**
+   * When true, forces the header to stack vertically (title/description on top,
+   * actions below) at every viewport. Use this when the title is long OR the
+   * actions are wide (e.g. a row of filter pills on /projects). Without this,
+   * the header uses a row layout on sm+ which can squish long titles into a
+   * narrow column.
+   */
+  stacked?: boolean;
 };
 
-const SectionHeader: React.FC<Props> = ({ eyebrow, title, description, actions }) => {
+const SectionHeader: React.FC<Props> = ({ eyebrow, title, description, actions, stacked = false }) => {
   const reducedMotion = useReducedMotion();
 
   return (
     <motion.div
-      className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+      className={
+        stacked
+          ? 'flex flex-col gap-6'
+          : 'flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8'
+      }
       variants={fadeUp(reducedMotion)}
     >
-      <div className="space-y-2">
-        {eyebrow && <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">{eyebrow}</div>}
-        <div className="text-2xl font-semibold sm:text-3xl">{title}</div>
-        {description && <p className="max-w-3xl text-base text-slate-600 dark:text-slate-300">{description}</p>}
+      <div className={stacked ? 'space-y-2 max-w-3xl' : 'min-w-0 flex-1 space-y-2'}>
+        {eyebrow && (
+          <div className="section-eyebrow flex items-center gap-2">
+            <span className="block h-px w-6 bg-gold" />
+            {eyebrow}
+          </div>
+        )}
+        <h2 className="section-title">{title}</h2>
+        <div className="ledger-rule" />
+        {description && (
+          <p className="text-base leading-relaxed text-inkSoft dark:text-parchment/80">
+            {description}
+          </p>
+        )}
       </div>
-      {actions}
+      {actions && <div className={stacked ? '' : 'shrink-0'}>{actions}</div>}
     </motion.div>
   );
 };

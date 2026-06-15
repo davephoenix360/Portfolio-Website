@@ -3,6 +3,15 @@ import SectionHeader from '../components/SectionHeader';
 import { fadeUp, staggerContainer } from '../components/motion';
 import { experiences } from '../data/experience';
 
+/**
+ * Experience — "Career Ledger"
+ *
+ * The timeline of roles, formatted like a brokerage statement:
+ *   - Date column on the left (monospaced, "as of")
+ *   - Each entry is a "transaction" — role, organization, location
+ *   - Highlights are itemized below
+ */
+
 const Experience: React.FC = () => {
   const reducedMotion = useReducedMotion();
 
@@ -14,37 +23,64 @@ const Experience: React.FC = () => {
       animate="show"
     >
       <SectionHeader
-        eyebrow="Experience"
-        title="Where I've been focusing"
-        description="Highlights from roles, projects, and mentorship that shaped how I build and collaborate."
+        eyebrow="Career Ledger"
+        title="Where I've been putting in the hours"
+        description="Roles, internships, and the leadership stuff. Ordered most-recent first, like a brokerage statement."
       />
 
       <motion.div
         variants={fadeUp(reducedMotion)}
-        className="relative mt-4 space-y-6 border-l border-slate-200 pl-6 dark:border-slate-800"
+        className="relative mt-4"
       >
-        {experiences.map((item) => (
-          <div key={`${item.company}-${item.period}`} className="card-surface ml-[-6px] p-5">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div className="text-sm font-semibold text-slate-500">{item.period}</div>
-                <h3 className="text-xl font-semibold">{item.role}</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300">{item.company} · {item.location}</p>
+        {/* The "ledger spine" — a thin gold line down the left */}
+        <div className="absolute left-0 top-2 bottom-2 hidden w-px bg-gradient-to-b from-gold/60 via-gold/30 to-transparent sm:block" />
+
+        <div className="space-y-8 sm:pl-8">
+          {experiences.map((item) => (
+            <motion.div
+              key={`${item.company}-${item.period}`}
+              variants={fadeUp(reducedMotion)}
+              className="relative"
+            >
+              {/* The "transaction dot" on the ledger line */}
+              <div className="absolute -left-[33px] top-3 hidden h-2 w-2 rounded-full bg-gold ring-4 ring-parchment dark:ring-vaultInk sm:block" />
+
+              <div className="card-surface p-5">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
+                      {item.period} · {item.location}
+                    </div>
+                    <h3 className="mt-1 font-display text-2xl font-semibold text-vault dark:text-parchment">
+                      {item.role}
+                    </h3>
+                    <p className="font-mono text-sm text-inkSoft dark:text-parchment/80">
+                      {item.company}
+                    </p>
+                  </div>
+                  <div className="rounded-full border border-vault/30 bg-parchment px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-vault dark:border-gold/30 dark:bg-vaultInk dark:text-parchment">
+                    {item.summary}
+                  </div>
+                </div>
+
+                {/* Itemized highlights — the "what was returned" */}
+                <div className="mt-4 border-t border-vault/15 pt-4 dark:border-gold/15">
+                  <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
+                    Itemized returns
+                  </div>
+                  <ul className="mt-2 space-y-2 text-sm text-inkSoft dark:text-parchment/80">
+                    {item.highlights.map((highlight) => (
+                      <li key={highlight} className="flex gap-3">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-200">
-                {item.summary}
-              </div>
-            </div>
-            <ul className="mt-4 space-y-2 text-sm text-slate-700 dark:text-slate-200">
-              {item.highlights.map((highlight) => (
-                <li key={highlight} className="flex gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>{highlight}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </motion.section>
   );

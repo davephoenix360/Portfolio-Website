@@ -63,20 +63,21 @@ const Experience: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Itemized highlights — the "what was returned" */}
-                <div className="mt-4 border-t border-vault/15 pt-4 dark:border-gold/15">
-                  <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
-                    Itemized returns
+                {item.highlights.length > 0 && (
+                  <div className="mt-4 border-t border-vault/15 pt-4 dark:border-gold/15">
+                    <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
+                      Itemized returns
+                    </div>
+                    <ul className="mt-2 space-y-2 text-sm text-inkSoft dark:text-parchment/80">
+                      {item.highlights.map((highlight) => (
+                        <li key={highlight} className="flex gap-3">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="mt-2 space-y-2 text-sm text-inkSoft dark:text-parchment/80">
-                    {item.highlights.map((highlight) => (
-                      <li key={highlight} className="flex gap-3">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                )}
               </div>
             </motion.div>
           ))}

@@ -28,6 +28,17 @@ export const experiences: ExperienceItem[] = [
   // Professional Experience
   // ===============================
   {
+    company: 'Dayforce',
+    role: 'DevOps / Software Engineering Intern',
+    period: 'May 2026 — Dec 2026',
+    location: 'Remote · Toronto, ON (base office)',
+    summary:
+      'Backend and DevOps work on Dayforce\'s payroll, workforce management, and benefits platform.',
+    highlights: [
+      'Internship in progress — details will land here as the work takes shape.',
+    ],
+  },
+  {
     company: 'Goodmorning.com',
     role: 'DevOps / Software Engineering Intern',
     period: 'Jan 2025 — Aug 2025',

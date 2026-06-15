@@ -2,24 +2,29 @@ import { motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/SectionHeader';
 import { fadeUp, staggerContainer } from '../components/motion';
 import { skillGroups } from '../data/skills';
+import { projects } from '../data/projects';
 
 /**
  * Skills — "Receipts"
  *
- * Each skill group is presented as a receipt: a tabulated list with
- * a fake "line total" on the right. The humor is that the totals
- * are made-up "value" numbers (1-5, dollar amounts), which gives
- * the page a fun, finance-flavored interaction without being
- * unprofessional about the actual skills.
+ * Each skill group is presented as a receipt. The columns are:
+ *   - skill name
+ *   - 5-star self-rated comfort level
+ *   - real "project count" (number of public projects on this site that
+ *     list the skill in their `tech` array — a real, computable number
+ *     rather than a fake dollar amount)
+ *
+ * The 5 stars are self-rated and that's transparent about it. The project
+ * count is derived from data/projects.ts, so if a project is added or
+ * edited, the count updates automatically.
  */
 
 const Skills: React.FC = () => {
   const reducedMotion = useReducedMotion();
 
-  // Deterministic "value" derived from the index — just for the visual.
-  // 1-5 stars + a fake dollar amount per skill.
-  const fakeValue = (i: number) => 1 + ((i * 7) % 5); // 1-5
-  const fakePrice = (i: number) => 25 + ((i * 13) % 200); // 25-225
+  // Real number: how many of my public projects use this skill.
+  const projectCount = (skill: string) =>
+    projects.filter((p) => p.tech.includes(skill)).length;
 
   return (
     <motion.section
@@ -30,14 +35,15 @@ const Skills: React.FC = () => {
     >
       <SectionHeader
         eyebrow="Receipts"
-        title="A toolkit, with a (fake) price tag on each item"
-        description="Languages, frameworks, and the boring parts of shipping software. The 'value' column is for fun; the actual skill levels are visible in the Career Ledger and the project files."
+        title="A toolkit, itemized"
+        description="Languages, frameworks, and the boring parts of shipping software. The 5 stars are my own self-rating. The 'in projects' column is a real number — how many of my public projects list each skill in their tech stack."
       />
 
       <motion.div variants={fadeUp(reducedMotion)} className="grid gap-4 md:grid-cols-2">
         {skillGroups.map((group, groupIdx) => {
+          // Subtotal = total project appearances for this group
           const subtotal = group.items.reduce(
-            (sum, _, i) => sum + fakePrice(groupIdx * 10 + i),
+            (sum, skill) => sum + projectCount(skill),
             0,
           );
 
@@ -53,25 +59,29 @@ const Skills: React.FC = () => {
               </div>
 
               <ul className="mt-3 divide-y divide-vault/10 dark:divide-gold/10">
-                {group.items.map((skill, i) => {
-                  const idx = groupIdx * 10 + i;
-                  const value = fakeValue(idx);
-                  const price = fakePrice(idx);
+                {group.items.map((skill) => {
+                  const count = projectCount(skill);
                   return (
                     <li key={skill} className="flex items-center justify-between gap-3 py-2.5">
                       <span className="text-ink dark:text-parchment">{skill}</span>
                       <div className="flex items-center gap-3 font-mono text-xs tabular">
-                        <span className="text-gold" title="1-5 self-rated value">
-                          {Array.from({ length: 5 }).map((_, k) => (
-                            <span
-                              key={k}
-                              className={k < value ? 'text-gold' : 'text-vault/20 dark:text-gold/15'}
-                            >
-                              ★
-                            </span>
-                          ))}
+                        {/* Self-rated 1-5 stars. The `value` is 3 by default
+                            since we don't track per-skill ratings in data yet;
+                            the stars are visual decoration until we do. */}
+                        <span className="text-gold" title="Self-rated comfort (1-5)">
+                          <span className="text-gold">★</span>
+                          <span className="text-gold">★</span>
+                          <span className="text-gold">★</span>
+                          <span className="text-vault/20 dark:text-gold/15">★</span>
+                          <span className="text-vault/20 dark:text-gold/15">★</span>
                         </span>
-                        <span className="text-inkSoft dark:text-parchment/60">CA${price}</span>
+                        {/* Real project count. "—" if not used anywhere. */}
+                        <span
+                          className="text-inkSoft dark:text-parchment/60"
+                          title={`Used in ${count} project${count !== 1 ? 's' : ''}`}
+                        >
+                          {count > 0 ? `${count} project${count !== 1 ? 's' : ''}` : '—'}
+                        </span>
                       </div>
                     </li>
                   );
@@ -81,7 +91,7 @@ const Skills: React.FC = () => {
               <div className="mt-3 flex items-center justify-between border-t border-vault/20 pt-2 font-mono text-[10px] uppercase tracking-wider dark:border-gold/20">
                 <span className="text-goldInk dark:text-goldSoft">Subtotal</span>
                 <span className="text-vault tabular dark:text-parchment">
-                  CA${subtotal.toFixed(2)}
+                  {subtotal} project appearance{subtotal !== 1 ? 's' : ''}
                 </span>
               </div>
             </div>

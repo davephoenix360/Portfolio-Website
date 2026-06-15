@@ -105,8 +105,13 @@ const ProjectCard: React.FC<Props> = ({ project, onOpen, featured = false }) => 
       </div>
 
       {featured && project.image && (
-        <div className="mt-2 overflow-hidden rounded-lg border border-vault/15 bg-parchment/60 lg:mt-0 lg:w-60 lg:self-stretch dark:border-gold/15">
-          <img src={project.image} alt={project.title} className="h-full w-full object-cover" loading="lazy" />
+        <div className="mt-2 flex items-center justify-center overflow-hidden rounded-lg border border-vault/15 bg-vaultInk p-6 lg:mt-0 lg:w-60 lg:self-stretch dark:border-gold/15">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="h-full max-h-48 w-full object-contain"
+            loading="lazy"
+          />
         </div>
       )}
     </motion.article>

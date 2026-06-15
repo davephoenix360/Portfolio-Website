@@ -47,3 +47,7 @@ Thumbs.db
 # Misc
 # ===============================
 coverage/
+
+# Vite/tsc -b build outputs
+vite.config.d.ts
+vite.config.js

@@ -2,47 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   DiepreyeCD portfolio — "old-school money" + peak UX
+   Theme tokens (light + dark) are loaded here so Tailwind
+   utility classes can use them.
+   ============================================================ */
+
 :root {
   color-scheme: light;
-  --bg-base: #f8f7f4;
-  --bg-glow-1: rgba(59, 130, 246, 0.12);
-  --bg-glow-2: rgba(14, 165, 233, 0.08);
-  --noise-opacity: 0.06;
+  --bg-base: #F4ECD8;
+  --bg-surface: #FBF6E7;
+  --bg-ink: #1A1A1A;
+  --bg-vault: #0F4C3A;
+  --bg-gold: #B8860B;
+  --bg-glow-1: rgba(15, 76, 58, 0.10);
+  --bg-glow-2: rgba(184, 134, 11, 0.07);
+  --noise-opacity: 0.05;
+  --ledger-line: rgba(15, 76, 58, 0.05);
 }
 
 .dark {
   color-scheme: dark;
-  --bg-base: #0b1224;
-  --bg-glow-1: rgba(30, 58, 138, 0.28);
-  --bg-glow-2: rgba(14, 116, 144, 0.18);
+  --bg-base: #0A1F18;
+  --bg-surface: #0F2A20;
+  --bg-ink: #F0EAD6;
+  --bg-vault: #1B5E48;
+  --bg-gold: #D4AF37;
+  --bg-glow-1: rgba(27, 94, 72, 0.35);
+  --bg-glow-2: rgba(212, 175, 55, 0.10);
   --noise-opacity: 0.08;
+  --ledger-line: rgba(212, 175, 55, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: theme('fontFamily.body');
   background:
-    radial-gradient(1100px 700px at 5% -10%, var(--bg-glow-1), transparent 60%),
+    radial-gradient(900px 600px at 5% -10%, var(--bg-glow-1), transparent 60%),
     radial-gradient(900px 600px at 95% 10%, var(--bg-glow-2), transparent 55%),
     var(--bg-base);
-  color: #0f172a;
+  color: var(--bg-ink);
   min-height: 100vh;
   position: relative;
   isolation: isolate;
+  font-feature-settings: 'ss01' on, 'cv11' on;
 }
 
 .dark body {
-  color: #e2e8f0;
+  color: var(--bg-ink);
 }
 
+/* Subtle paper-grain noise overlay — gives the parchment its tooth. */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
   opacity: var(--noise-opacity);
-  mix-blend-mode: soft-light;
+  mix-blend-mode: multiply;
   z-index: 0;
+}
+
+.dark body::before {
+  mix-blend-mode: soft-light;
 }
 
 #root {
@@ -52,30 +78,129 @@ body::before {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
+
+/* Headings get the "old money" serif. */
+h1, h2, h3, .font-display {
+  font-family: theme('fontFamily.display');
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   Reusable component classes
+   ============================================================ */
 
 .section-shell {
   @apply mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8;
 }
 
 .card-surface {
-  @apply rounded-2xl border border-slate-200/70 bg-white/80 shadow-soft backdrop-blur;
+  @apply rounded-xl border border-vault/15 bg-parchmentSoft/80 shadow-soft backdrop-blur;
 }
 
 .dark .card-surface {
-  @apply border-slate-800/70 bg-slate-900/70 shadow-lg;
+  @apply border-gold/15 bg-vaultInk/70 shadow-vault;
 }
 
+/* "Section" — the header that introduces each page */
+.section-eyebrow {
+  @apply font-mono text-xs uppercase tracking-ledger text-gold;
+}
+
+.dark .section-eyebrow {
+  @apply text-goldSoft;
+}
+
+.section-title {
+  @apply font-display text-3xl font-bold text-vault sm:text-4xl;
+}
+
+.dark .section-title {
+  @apply text-parchment;
+}
+
+/* The pill — a small "ledger chip" for tags + buttons */
 .pill {
-  @apply rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:bg-accent hover:text-white;
+  @apply inline-flex items-center gap-2 rounded-full border border-vault/25 bg-parchment px-3 py-1 font-mono text-xs uppercase tracking-wider text-vault transition hover:-translate-y-0.5 hover:border-gold hover:text-goldInk;
 }
 
 .dark .pill {
-  @apply bg-slate-800 text-slate-200 hover:bg-accent;
+  @apply border-gold/25 bg-vaultInk/60 text-goldSoft hover:border-goldSoft hover:text-goldSoft;
 }
 
+/* "Coin button" — primary CTA, gold like a coin face */
+.coin-btn {
+  @apply inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 font-mono text-sm font-bold uppercase tracking-wider text-parchment shadow-emboss transition hover:-translate-y-1 hover:bg-goldInk hover:shadow-vault;
+}
+
+.dark .coin-btn {
+  @apply bg-goldSoft text-vaultInk hover:bg-gold;
+}
+
+.ghost-btn {
+  @apply inline-flex items-center gap-2 rounded-full border border-vault/40 bg-transparent px-5 py-3 font-mono text-sm font-semibold uppercase tracking-wider text-vault transition hover:-translate-y-1 hover:border-gold hover:text-goldInk;
+}
+
+.dark .ghost-btn {
+  @apply border-gold/40 text-parchment hover:border-goldSoft hover:text-goldSoft;
+}
+
+/* The "ledger" rule — a thin gold line under section heads */
+.ledger-rule {
+  @apply mt-2 h-px w-16 bg-gradient-to-r from-gold via-gold/60 to-transparent;
+}
+
+.dark .ledger-rule {
+  @apply from-goldSoft via-goldSoft/60 to-transparent;
+}
+
+/* "Receipt" — the skill/holding list item */
+.receipt {
+  @apply flex items-center justify-between gap-3 border-b border-vault/10 py-3 font-mono text-sm;
+}
+
+.dark .receipt {
+  @apply border-gold/10;
+}
+
+/* Tabular numbers for the brokerage-statement look */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus ring — gold, not blue, to match the theme */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--bg-gold);
   outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Selection — gold on cream */
+::selection {
+  background: var(--bg-gold);
+  color: var(--bg-base);
+}
+
+/* Scrollbar (subtle, dark + gold) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 76, 58, 0.2);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 76, 58, 0.4);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.2);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.4);
 }

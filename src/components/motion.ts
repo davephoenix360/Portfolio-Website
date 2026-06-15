@@ -60,7 +60,7 @@ export const hoverLift = (reducedMotion?: ReducedMotionPreference): Variants => 
       y: prefersReducedMotion ? 0 : -6,
       boxShadow: prefersReducedMotion
         ? '0 14px 30px -24px rgba(15, 23, 42, 0.45)'
-        : '0 24px 50px -32px rgba(37, 99, 235, 0.45)',
+        : '0 24px 50px -32px rgba(184, 134, 11, 0.55)',
       transition: {
         ...(prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 220, damping: 20 }),
       },

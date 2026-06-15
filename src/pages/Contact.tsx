@@ -6,17 +6,16 @@ import { profile } from '../data/profile';
 import { GithubIcon, LinkedInIcon, MailIcon } from '../components/icons';
 
 const Contact: React.FC = () => {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
   const reducedMotion = useReducedMotion();
 
   const handleCopy = async (email: string) => {
     try {
       await navigator.clipboard.writeText(email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      setCopied(email);
+      setTimeout(() => setCopied(null), 1500);
     } catch (err) {
       console.error('Unable to copy email', err);
-      setCopied(false);
     }
   };
 
@@ -28,9 +27,9 @@ const Contact: React.FC = () => {
       animate="show"
     >
       <SectionHeader
-        eyebrow="Contact"
-        title="Let's build something useful"
-        description="If you have an internship opportunity, interesting problem, or you just want to talk about AI systems, feel free to reach out."
+        eyebrow="Wire Transfer"
+        title="Open an account"
+        description="Internship opportunity, interesting problem, or just want to talk about AI systems or compiler complaints — I'm in. The fastest route is email; the slowest is LinkedIn (but I do check it)."
       />
 
       <motion.div
@@ -38,76 +37,86 @@ const Contact: React.FC = () => {
         className="card-surface grid gap-6 p-6 sm:grid-cols-[1.2fr_1fr]"
       >
         <div className="space-y-4">
-          <div className="text-sm uppercase tracking-[0.25em] text-slate-500">Email</div>
+          <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
+            Account · Email
+          </div>
+
           <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+            <div className="inline-flex items-center gap-2 rounded-full border border-vault/30 bg-parchment px-4 py-2 font-mono text-sm text-ink dark:border-gold/30 dark:bg-vaultInk dark:text-parchment">
               <MailIcon />
               {profile.emailPersonal}
             </div>
             <button
               onClick={() => handleCopy(profile.emailPersonal)}
-              className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-accent"
+              className="rounded-full border border-vault/30 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-vault transition hover:-translate-y-0.5 hover:border-gold hover:text-goldInk dark:border-gold/30 dark:text-parchment dark:hover:border-goldSoft dark:hover:text-goldSoft"
             >
-              {copied ? 'Copied!' : 'Copy email'}
+              {copied === profile.emailPersonal ? '✓ Copied' : 'Copy'}
             </button>
           </div>
+
           <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+            <div className="inline-flex items-center gap-2 rounded-full border border-vault/30 bg-parchment px-4 py-2 font-mono text-sm text-ink dark:border-gold/30 dark:bg-vaultInk dark:text-parchment">
               <MailIcon />
               {profile.emailSchool}
             </div>
             <button
               onClick={() => handleCopy(profile.emailSchool)}
-              className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-accent"
+              className="rounded-full border border-vault/30 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-vault transition hover:-translate-y-0.5 hover:border-gold hover:text-goldInk dark:border-gold/30 dark:text-parchment dark:hover:border-goldSoft dark:hover:text-goldSoft"
             >
-              {copied ? 'Copied!' : 'Copy email'}
+              {copied === profile.emailSchool ? '✓ Copied' : 'Copy'}
             </button>
           </div>
-          <p className="text-base text-slate-700 dark:text-slate-200">
-            Please include context about timelines, team size, and the problems you want solved. I
-            respond quickly to concise notes.
+
+          <p className="text-base leading-relaxed text-inkSoft dark:text-parchment/80">
+            <span className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
+              Pro tip
+            </span>{' '}
+            Include the role, the team, and the rough timeline in the first message. I respond fastest to concise notes — usually within 24 hours, definitely within the week.
           </p>
         </div>
 
         <div className="space-y-3">
-          <div className="text-sm uppercase tracking-[0.25em] text-slate-500">Socials</div>
-          <div className="flex flex-wrap gap-3">
+          <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
+            Also reachable at
+          </div>
+          <div className="flex flex-wrap gap-2">
             <a
-              className="pill inline-flex items-center gap-2"
+              className="pill"
               href={profile.socials.find((s) => s.label === 'GitHub')?.href}
               target="_blank"
               rel="noreferrer"
             >
-              <GithubIcon />
-              GitHub
+              <GithubIcon /> GitHub
             </a>
             <a
-              className="pill inline-flex items-center gap-2"
+              className="pill"
               href={profile.socials.find((s) => s.label === 'GitHub_School')?.href}
               target="_blank"
               rel="noreferrer"
             >
-              <GithubIcon />
-              School GitHub
+              <GithubIcon /> School GH
             </a>
             <a
-              className="pill inline-flex items-center gap-2"
+              className="pill"
               href={profile.socials.find((s) => s.label === 'LinkedIn')?.href}
               target="_blank"
               rel="noreferrer"
             >
-              <LinkedInIcon />
-              LinkedIn
+              <LinkedInIcon /> LinkedIn
             </a>
           </div>
-          <div className="rounded-2xl border border-slate-200/70 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-800/70 dark:bg-slate-900/70 dark:text-slate-200">
-            {/* Calendly Landing Page */}
+          <div className="rounded-lg border border-vault/15 bg-parchment/60 p-4 dark:border-gold/15 dark:bg-vaultInk/60">
+            <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
+              Book time (in beta)
+            </div>
             <iframe
               src="https://calendly.com/diepreye-ualberta"
               width="100%"
               height="400"
-              frameBorder="0"
-            ></iframe>
+              frameBorder={0}
+              title="Book a 30-min slot with Diepreye"
+              className="mt-2 rounded-md"
+            />
           </div>
         </div>
       </motion.div>

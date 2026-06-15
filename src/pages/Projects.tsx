@@ -24,21 +24,21 @@ const Projects: React.FC = () => {
       animate="show"
     >
       <SectionHeader
-        eyebrow="Projects"
-        title="Systems and products I've been building"
-        description="Representative work across AI, backend, DevOps, and full-stack surfaces. Filter by interest to explore."
+        eyebrow="Holdings"
+        title="What I own, what I built, what I learned the hard way"
+        description="Representative work across AI, backend, DevOps, systems, and full-stack surfaces. Filter by category to narrow the list — every project has a file you can open."
         actions={
           <div className="flex flex-wrap gap-2">
             <button
-              className={`pill ${selectedTag === 'All' ? 'bg-accent text-white' : ''}`}
+              className={`pill ${selectedTag === 'All' ? '!bg-gold !text-parchment dark:!bg-goldSoft dark:!text-vaultInk' : ''}`}
               onClick={() => setSelectedTag('All')}
             >
-              All
+              All ({projects.length})
             </button>
             {projectTags.map((tag) => (
               <button
                 key={tag}
-                className={`pill ${selectedTag === tag ? 'bg-accent text-white' : ''}`}
+                className={`pill ${selectedTag === tag ? '!bg-gold !text-parchment dark:!bg-goldSoft dark:!text-vaultInk' : ''}`}
                 onClick={() => setSelectedTag(tag)}
               >
                 {tag}

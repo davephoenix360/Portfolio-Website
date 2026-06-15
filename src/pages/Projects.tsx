@@ -27,6 +27,7 @@ const Projects: React.FC = () => {
         eyebrow="Holdings"
         title="What I own, what I built, what I learned the hard way"
         description="Representative work across AI, backend, DevOps, systems, and full-stack surfaces. Filter by category to narrow the list — every project has a file you can open."
+        stacked
         actions={
           <div className="flex flex-wrap gap-2">
             <button

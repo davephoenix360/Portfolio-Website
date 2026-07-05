@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowIcon, GithubIcon, LinkedInIcon } from '../components/icons';
 import { fadeUp, staggerContainer } from '../components/motion';
+import Counter from '../components/Counter';
 import { projects } from '../data/projects';
 import { profile } from '../data/profile';
 
@@ -29,24 +30,37 @@ const Home: React.FC = () => {
 
   // A handful of "year-to-date returns" — high-level wins, but
   // written in the user's voice (not corporate).
+  // `value` (optional) + prefix/suffix feed the Counter — numbers count up
+  // when the section scrolls into view. `label` is the static fallback for
+  // ranges like "20-30%" that don't make sense to animate.
   const returns = [
     {
       label: '11',
+      value: 11,
+      animateValue: true,
       headline: 'Projects shipped',
       blurb: 'Across AI, backend, mobile, systems, and the occasional game jam. None of them won awards. Some of them shipped.',
     },
     {
       label: '20-30%',
+      value: 25,
+      animateValue: false,
       headline: 'Latency reduction',
       blurb: 'Tightened a high-traffic WordPress + PHP platform at Goodmorning.com. Mostly by deleting code, not adding it.',
     },
     {
       label: '~90',
+      value: 90,
+      animateValue: true,
+      prefix: '~',
       headline: 'Credits toward the SWE',
       blurb: 'University of Alberta, Co-op, May 2027. Still passing the classes, which is the part they don\'t put on the brochure.',
     },
     {
       label: '4 yrs',
+      value: 4,
+      animateValue: true,
+      suffix: ' yrs',
       headline: 'Writing the same backend twice',
       blurb: 'Once in Java for school, once in Python/TS for work, once in C for fun. The third one is where the muscle memory actually shows up.',
     },
@@ -57,7 +71,8 @@ const Home: React.FC = () => {
       className="section-shell gap-8"
       variants={staggerContainer(reducedMotion)}
       initial="hidden"
-      animate="show"
+      whileInView="show"
+      viewport={{ once: true, margin: '-10% 0px' }}
     >
       {/* ============================================================
           HERO — headline + 3D coin
@@ -183,7 +198,16 @@ const Home: React.FC = () => {
                 className="bg-parchmentSoft/95 p-5 transition hover:bg-parchmentSoft dark:bg-vaultInk/95 dark:hover:bg-vaultInk"
               >
                 <div className="font-display text-3xl font-bold text-goldInk dark:text-goldSoft tabular">
-                  {ret.label}
+                  {ret.animateValue ? (
+                    <Counter
+                      value={ret.value}
+                      prefix={ret.prefix}
+                      suffix={ret.suffix}
+                      duration={1.2}
+                    />
+                  ) : (
+                    ret.label
+                  )}
                 </div>
                 <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-vault dark:text-parchment">
                   {ret.headline}

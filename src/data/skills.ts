@@ -67,3 +67,21 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
 ];
+
+/* ============================================================
+   Flat list of languages — used by the stats marquee.
+   Order is roughly "most-used → least-used". Duplicate-friendly.
+   ============================================================ */
+export const languages: string[] = [
+  'TypeScript',
+  'JavaScript',
+  'Python',
+  'C#',
+  'SQL',
+  'C',
+  'C++',
+  'Java',
+  'Bash',
+  'HTML / CSS',
+  'MaxScript',
+];

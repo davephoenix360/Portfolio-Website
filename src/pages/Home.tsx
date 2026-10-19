@@ -2,8 +2,8 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { profile } from '../data/profile';
 import { projects } from '../data/projects';
 import { experiences } from '../data/experience';
-import { skillGroups } from '../data/skills';
-import CharacterSheet from '../components/CharacterSheet';
+import LanguageMarquee from '../components/LanguageMarquee';
+import AnimeMarquee from '../components/AnimeMarquee';
 
 /* ============================================================
    Hero — name, pitch, CTAs. Minimal, single screen.
@@ -422,6 +422,73 @@ POST /hire-diepreye
 };
 
 /* ============================================================
+   Stats — infinite-scroll language + anime lists.
+
+   Two horizontal marquees replace the old RPG character sheet.
+   Languages first (the focus), then animes (the personality).
+   Both auto-scroll infinitely, pause on hover, and respect
+   prefers-reduced-motion.
+   ============================================================ */
+const Stats: React.FC = () => {
+  const reducedMotion = useReducedMotion();
+  return (
+    <motion.section
+      id="stats"
+      className="section-shell"
+      initial={false}
+    >
+      {/* Eyebrow */}
+      <div className="eyebrow-cmd">
+        <span className="shell-prompt">~ $</span> <span className="text-text">ls</span>{' '}
+        <span className="text-gold">./languages --all</span>
+      </div>
+
+      <h2 className="section-title">
+        Every language I&apos;ve shipped something real in.
+      </h2>
+      <p className="section-subtitle">
+        From production backend services to game scripts and
+        OS-level code — these are the ones that earned their
+        place on the roster.
+      </p>
+
+      <div className="mt-2">
+        <LanguageMarquee />
+      </div>
+
+      <div className="tty-divider mt-12">
+        <span>now playing</span>
+      </div>
+
+      <div className="eyebrow-cmd">
+        <span className="shell-prompt">~ $</span> <span className="text-text">ls</span>{' '}
+        <span className="text-gold">./animes --watched</span>
+      </div>
+
+      <h2 className="section-title">
+        What I&apos;m watching when I&apos;m not shipping code.
+      </h2>
+      <p className="section-subtitle">
+        A small slice of the shelf. Drop me a rec — I&apos;m always
+        looking for the next thing.
+      </p>
+
+      <div className="mt-2">
+        <AnimeMarquee />
+      </div>
+
+      {/* If reduced motion is on, the marquees render static —
+          we still want to credit the source on hover. */}
+      {reducedMotion && (
+        <p className="font-mono text-[10px] uppercase tracking-wide2 text-textSubtle">
+          (animations paused — enable motion for the scrolling list)
+        </p>
+      )}
+    </motion.section>
+  );
+};
+
+/* ============================================================
    Home — single-page scroll
    ============================================================ */
 const Home: React.FC = () => {
@@ -431,7 +498,7 @@ const Home: React.FC = () => {
       <About />
       <Projects />
       <Experience />
-      <CharacterSheet skillGroups={skillGroups} />
+      <Stats />
       <Contact />
     </div>
   );

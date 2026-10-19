@@ -316,3 +316,108 @@ a:focus-visible {
   border-color: var(--accent);
   background: var(--bg-surface);
 }
+
+/* ============================================================
+   Infinite-scroll marquee (stats section)
+   ============================================================ */
+
+/* The outer overflow-hidden wrapper. Edge-fades make the
+   scrolling content look like it dissolves off the sides. */
+.marquee-wrap {
+  position: relative;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+/* The animated track — moves from 0 to -50% (the second copy
+   of the content lines up perfectly behind the first). */
+.marquee-track {
+  animation: marquee-scroll linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Language pill — a small monospace chip with a gold dot prefix */
+.marquee-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.025);
+  font-family: 'JetBrains Mono', Menlo, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.marquee-pill-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(255, 179, 0, 0.4);
+}
+
+.marquee-pill-text {
+  color: var(--text-primary);
+}
+
+/* Anime logo card — neutral surface with the logo centered.
+   On hover, the border lights up gold and the card lifts. */
+.marquee-anime-wrap {
+  margin-top: 1.25rem;
+}
+
+.marquee-anime-card {
+  flex-shrink: 0;
+  width: 200px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.marquee-anime-card:hover {
+  border-color: var(--accent);
+  background: rgba(255, 179, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+.marquee-anime-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(0.95) contrast(1.05);
+  transition: filter 0.2s ease;
+}
+
+.marquee-anime-card:hover .marquee-anime-img {
+  filter: brightness(1.05) contrast(1.1) drop-shadow(0 0 8px rgba(255, 179, 0, 0.25));
+}

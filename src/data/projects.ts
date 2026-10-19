@@ -21,67 +21,44 @@ export type Project = {
 
 export const projects: Project[] = [
   // ===============================
-  // Flagship Projects
+  // Flagship
   // ===============================
   {
-    id: 'nextep',
-    title: 'Nextep',
-    summary: 'Resume builder + job-application tooling to streamline job-ready profiles.',
+    id: 'nexstepper',
+    title: 'Nexstepper',
+    summary: 'Production AI resume builder with one-click JD-tailored variants.',
     description:
-      'Building a resume builder with reusable content blocks and clean templates, plus a companion Chrome extension to capture job postings and application details. Designed for fast iteration, structured data, and future AI-assisted scoring and tailoring.',
-    tags: ['Full-Stack', 'Frontend', 'Backend', 'Tooling'],
-    tech: ['TypeScript', 'React', 'Next.js', 'Chrome Extension (MV3)'],
+      'Solo-built and deployed production AI resume builder. Users parse a JD, get a tailored resume variant, run an ATS score, and ship — with real-time collaboration, Stripe-secured payments, and a chat co-pilot that runs the same LLM workflows I designed.',
+    tags: ['Full-Stack', 'AI', 'Production', 'Solo'],
+    tech: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS', 'Vercel', 'Liveblocks', 'LangChain'],
     links: [
-      { label: 'GitHub', href: 'https://github.com/davephoenix360/nextep' },
-      { label: 'GitHub', href: 'https://github.com/davephoenix360/nextep-extension' },
+      { label: 'Live', href: 'https://nexstepper.com' },
+      { label: 'GitHub', href: 'https://github.com/davephoenix360' },
     ],
-    image: '/projects/nextep.png',
-    status: 'Iterating',
+    image: '/projects/nexstepper.png',
+    status: 'Live',
     featured: true,
     impact: [
-      'Accelerated resume iteration with modular content blocks and templates.',
-      'Captured job postings quickly with an extension-driven intake flow.',
-      'Laid the groundwork for AI-assisted scoring and tailoring.',
+      'Designed and shipped the full product surface end-to-end (DB schema, API, UI, payments, deployment).',
+      'AI co-pilot uses the same schema-validation pattern in production that the LLM SDKs accept natively.',
+      'Real-time collaboration layer via Liveblocks; payments and GDPR data controls live in prod.',
     ],
     whatIDid: [
-      'Designed the structured resume data model and template system.',
-      'Built the Chrome extension for job capture and metadata sync.',
-      'Outlined evaluation criteria for future AI scoring workflows.',
+      'Designed the structured resume data model and the JD-parser + AI-tailoring pipeline.',
+      'Built the AI chat co-pilot using OpenAI + LangChain with zod-validated structured outputs.',
+      'Wired Stripe payments, Vercel + AWS deployment, and the Liveblocks real-time layer.',
     ],
-    tradeoffs: 'Optimized for rapid iteration and extensibility; full automation waits for stable schemas.',
-  },
-
-  {
-    id: 'ace-budget-ai',
-    title: 'Ace Budget AI',
-    summary: 'AI-powered budgeting assistant for expense tracking and personalized insights.',
-    description:
-      'Prototyped an AI budgeting workflow that ingests transaction exports, categorizes spending, and generates goal-aware summaries and recommendations. Designed with transparency, extensibility, and future forecasting features in mind.',
-    tags: ['AI', 'Backend', 'Full-Stack', 'Team Project', 'Hackathon'],
-    tech: ['Python', 'TypeScript', 'React', 'NLP / LLM APIs'],
-    links: [{ label: 'GitHub', href: 'https://github.com/davephoenix360/ace_budget_ai' }],
-    image: '/projects/ace-budget-ai.png',
-    status: 'Prototype',
-    impact: [
-      'Automated categorization of transaction exports for fast budget insights.',
-      'Generated goal-aware summaries to highlight spending patterns.',
-      'Delivered a prototype workflow ready for forecasting extensions.',
-    ],
-    whatIDid: [
-      'Built the ingestion pipeline for CSV exports and normalization.',
-      'Implemented LLM-assisted categorization with readable explanations.',
-      'Shaped the UI for budget snapshots and alerts.',
-    ],
-    tradeoffs: 'Prioritized explainability and auditability over aggressive automation.',
+    tradeoffs:
+      'Optimized for fast iteration over feature breadth — most "advanced" features ship behind a small paid gate to keep the surface auditable.',
   },
 
   {
     id: 'streamer-university',
     title: 'Streamer University',
-    summary: 'Unity narrative + stats game with modular event-card and minigame systems.',
+    summary: 'Unity 2D visual-novel-style stats game — gold release with a team.',
     description:
-      'Built a 2D visual-novel-style stats management game in Unity with an event-card system supporting branching outcomes, flags, and fame/stress deltas. Integrated multiple minigames into the progression loop and shipped a polished gold release with a multi-developer team.',
-    tags: ['Game Dev', 'Systems', 'Team Project', 'School Project'],
+      'Built a 2D visual-novel-style stats management game in Unity. Designed the event-card system (branching outcomes, flags, fame/stress deltas), integrated minigames into the progression loop, and coordinated asset integration and bug triage as part of a multi-developer team. Shipped a polished gold release.',
+    tags: ['Game Dev', 'Team', 'Shipped'],
     tech: ['Unity', 'C#', 'JSON / CSV', 'Git'],
     links: [
       { label: 'Play', href: 'https://diepreyecdd.itch.io/streamer-university' },
@@ -93,7 +70,7 @@ export const projects: Project[] = [
     featured: true,
     impact: [
       'Shipped a polished gold release with a multi-developer team.',
-      'Delivered a branching narrative system with tunable outcomes.',
+      'Built the branching narrative system with tunable stat outcomes.',
       'Integrated minigames into the progression loop.',
     ],
     whatIDid: [
@@ -101,16 +78,17 @@ export const projects: Project[] = [
       'Built minigame hooks and progression balancing.',
       'Coordinated asset integration and bug triage.',
     ],
-    tradeoffs: 'Focused on a 2D pipeline for reliable performance and fast iteration.',
+    tradeoffs:
+      'Stuck to a 2D pipeline for reliable performance and fast iteration.',
   },
 
   {
     id: 'fairdraw',
     title: 'FairDraw',
-    summary: 'Multi-role Android app for event lotteries with QR flows and Firebase.',
+    summary: 'Multi-role Android app for event lotteries — Firestore + QR flows.',
     description:
-      'Built a multi-role Android application (Entrant / Organizer / Admin) supporting event creation, waitlists, and lottery-based selection workflows. Integrated Firebase Firestore and Storage, implemented QR-based flows, and validated core user journeys with Espresso and JUnit tests.',
-    tags: ['Mobile', 'Backend', 'Testing', 'Team Project', 'School Project'],
+      'Built a multi-role Android application (Entrant / Organizer / Admin) supporting event creation, waitlists, and lottery-based selection. Integrated Firebase Firestore and Storage, implemented QR-based check-in and selection flows, and validated core user journeys with Espresso and JUnit tests.',
+    tags: ['Mobile', 'Backend', 'Shipped', 'Team'],
     tech: ['Android (Java)', 'Firebase Firestore', 'Firebase Storage', 'Espresso', 'JUnit'],
     links: [{ label: 'GitHub', href: 'https://github.com/CMPUT301f25Orchid/Project' }],
     image: '/projects/fairdraw.png',
@@ -126,19 +104,20 @@ export const projects: Project[] = [
       'Built QR flows plus Firebase Storage integration.',
       'Wrote Espresso and JUnit tests for key paths.',
     ],
-    tradeoffs: 'Optimized core workflows first; push notifications and analytics were deferred.',
+    tradeoffs:
+      'Core workflows first; push notifications and analytics were deferred.',
   },
 
   // ===============================
-  // Systems / AI / Academic Projects
+  // Systems / AI
   // ===============================
   {
     id: 'os-labs',
     title: 'Operating Systems Labs (CMPUT 379)',
-    summary: 'Low-level OS components, concurrency, and virtual memory simulations in C.',
+    summary: 'OS primitives in C under Linux — concurrency, synchronization, virtual memory.',
     description:
-      'Implemented core operating system concepts in C under Linux, including process and thread abstractions, synchronization primitives, and virtual memory simulations. Analyzed correctness and performance trade-offs through systematic testing.',
-    tags: ['Systems', 'Concurrency', 'Low-Level', 'School Project'],
+      'Implemented core operating system concepts in C under Linux: process and thread abstractions, synchronization primitives, and virtual memory simulations. Analyzed correctness and performance trade-offs through systematic testing.',
+    tags: ['Systems', 'C', 'School'],
     tech: ['C', 'Linux', 'Semaphores', 'Mutexes', 'CAS', 'Virtual Memory'],
     links: [{ label: 'GitHub', href: 'https://github.com/DIEPREYECD/CMPUT-379' }],
     image: '/projects/placeholder.svg',
@@ -156,11 +135,11 @@ export const projects: Project[] = [
 
   {
     id: 'bullying-classifier',
-    title: 'Bullying Classifier Model',
-    summary: 'BERT-based NLP model for detecting bullying and harmful language.',
+    title: 'Bullying Classifier (BERT)',
+    summary: 'BERT-based NLP classifier for detecting harmful language in social text.',
     description:
-      'Fine-tuned a BERT-based NLP classifier to detect bullying in social media text. Built evaluation pipelines with precision, recall, and F1-score, and designed the architecture for real-time and multi-modal extensions.',
-    tags: ['AI', 'NLP', 'ML', 'Team Project', 'Hackathon'],
+      'Fine-tuned a BERT-based NLP classifier to detect bullying in social media text. Built evaluation pipelines with precision, recall, and F1-score, and shaped the architecture for real-time and multi-modal extensions.',
+    tags: ['AI', 'NLP', 'Team'],
     tech: ['PyTorch', 'Hugging Face Transformers', 'scikit-learn', 'Pandas', 'NumPy'],
     links: [{ label: 'Model', href: 'https://huggingface.co/Davephoenix/bert-bullying-detector' }],
     image: '/projects/placeholder.svg',
@@ -174,95 +153,7 @@ export const projects: Project[] = [
       'Fine-tuned the model and reported metrics.',
       'Explored deployment paths for real-time inference.',
     ],
-    tradeoffs: 'Focused on text-only signals; multi-modal inputs were deferred.',
-  },
-
-  {
-    id: 'lookmate',
-    title: 'LookMate',
-    summary: 'AI-powered style assistant with weather-aware outfit recommendations.',
-    description:
-      'Built a personalized style assistant using React and Next.js, integrating OpenAI APIs and AWS Lambda to generate outfit recommendations. Deployed on Vercel with cloud-backed services.',
-    tags: ['AI', 'Full-Stack', 'Team Project'],
-    tech: ['React', 'Next.js', 'TypeScript', 'OpenAI API', 'AWS Lambda', 'Vercel'],
-    links: [{ label: 'GitHub', href: 'https://github.com/boxerarakelyan777/LookMate' }],
-    image: '/projects/placeholder.svg',
-    status: 'Completed',
-    impact: [
-      'Generated personalized outfit recommendations with weather context.',
-      'Delivered a full-stack flow from prompt to suggestion.',
-    ],
-    whatIDid: [
-      'Built the Next.js UI and serverless API integrations.',
-      'Connected OpenAI API and Lambda for the recommendation flow.',
-    ],
-    tradeoffs: 'Kept rule-based guardrails minimal to move quickly.',
-  },
-
-  {
-    id: 'memorix-ai',
-    title: 'MemorixAI',
-    summary: 'AI-powered flashcard web app using RAG and LLM APIs.',
-    description:
-      'Built an AI-powered flashcard application using Llama 3 via Groq, handling backend APIs and multi-modal input features. Applied RAG techniques using LangChain to improve learning relevance.',
-    tags: ['AI', 'Full-Stack', 'RAG', 'Team Project'],
-    tech: ['React', 'Next.js', 'TypeScript', 'LangChain', 'Groq API', 'Firebase'],
-    links: [{ label: 'GitHub', href: 'https://github.com/boxerarakelyan777/MemorixAI' }],
-    image: '/projects/placeholder.svg',
-    status: 'Completed',
-    impact: [
-      'Improved flashcard relevance with RAG-assisted generation.',
-      'Supported multi-modal inputs for study sessions.',
-    ],
-    whatIDid: [
-      'Built the API layer and integrated LangChain pipelines.',
-      'Implemented retrieval flow using Groq Llama 3.',
-    ],
-    tradeoffs: 'Optimized for accuracy; real-time collaboration was deferred.',
-  },
-
-  {
-    id: 'keepr',
-    title: 'Keepr',
-    summary: 'Smart pantry management app with AI-generated recipes.',
-    description:
-      'Developed a pantry management web app using Firebase for storage and OpenAI-powered recipe generation based on available ingredients.',
-    tags: ['AI', 'Full-Stack'],
-    tech: ['React', 'Next.js', 'TypeScript', 'Firebase', 'OpenAI API'],
-    links: [{ label: 'GitHub', href: 'https://github.com/davephoenix360/keepr' }],
-    image: '/projects/placeholder.svg',
-    status: 'Completed',
-    impact: [
-      'Reduced pantry planning friction with AI recipe generation.',
-      'Centralized ingredient tracking with Firebase.',
-    ],
-    whatIDid: [
-      'Built the React UI and Firebase data layer.',
-      'Integrated OpenAI API for recipe suggestions.',
-    ],
-    tradeoffs: 'Scoped to core pantry flows; grocery integrations were deferred.',
-  },
-
-  {
-    id: 'guide-bot',
-    title: 'Guide Bot',
-    summary: 'Arduino-powered navigation robot for visually impaired users.',
-    description:
-      'Led a team to build an Arduino-based guide robot using Python and C++. Implemented outdoor navigation using Google Maps and OpenRouteService APIs to support precise movement between saved locations.',
-    tags: ['Robotics', 'Systems', 'Embedded', 'Team Project', 'Hackathon'],
-    tech: ['Python', 'C++', 'Arduino', 'Google Maps API', 'OpenRouteService API'],
-    links: [{ label: 'Devpost', href: 'https://devpost.com/software/hacked-2024' }],
-    image: '/projects/placeholder.svg',
-    status: 'Completed',
-    impact: [
-      'Demonstrated navigation assistance for visually impaired users.',
-      'Integrated routing APIs for outdoor path planning.',
-    ],
-    whatIDid: [
-      'Implemented route planning with mapping APIs.',
-      'Coordinated hardware and software integration on Arduino.',
-    ],
-    tradeoffs: 'Prototype optimized for outdoor navigation; indoor SLAM was deferred.',
+    tradeoffs: 'Text-only signals; multi-modal inputs were deferred.',
   },
 ];
 

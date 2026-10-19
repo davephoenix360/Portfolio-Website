@@ -1,378 +1,419 @@
-import { Suspense, lazy } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowIcon, GithubIcon, LinkedInIcon } from '../components/icons';
-import { fadeUp, staggerContainer } from '../components/motion';
-import Counter from '../components/Counter';
-import { projects } from '../data/projects';
 import { profile } from '../data/profile';
+import { projects } from '../data/projects';
+import { experiences } from '../data/experience';
+import { skillGroups } from '../data/skills';
+import CharacterSheet from '../components/CharacterSheet';
 
-const HeroCanvas = lazy(() => import('../components/HeroCanvas'));
-
-/**
- * Home — "The Vault" landing page.
- *
- * Money theming applied as a metaphor, not a costume:
- *   - Headline + pitch are first-person + conversational
- *   - Sections are named after bank-doc primitives: "Top Holdings",
- *     "Year-to-date returns", "Wire Details"
- *   - Numbers are tabular (monospaced) where they appear
- *   - The 3D hero is a gold coin (the signature element)
- *   - Copy is honest about being 21 and writing about money
- */
-
-const Home: React.FC = () => {
+/* ============================================================
+   Hero — name, pitch, CTAs. Minimal, single screen.
+   ============================================================ */
+const Hero: React.FC = () => {
   const reducedMotion = useReducedMotion();
-  const github = profile.socials.find((s) => s.label.toLowerCase().includes('github'))?.href;
-  const linkedin = profile.socials.find((s) => s.label.toLowerCase().includes('linkedin'))?.href;
-  const featured = projects.filter((project) => project.featured).slice(0, 2);
-  const featuredProjects = featured.length > 0 ? featured : projects.slice(0, 2);
+  return (
+    <section
+      id="top"
+      className="section-shell gap-6 pb-20 pt-12 sm:pt-20"
+    >
+      <motion.div
+        initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-wrap items-center gap-2"
+      >
+        <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/5 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide2 text-gold">
+          <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
+          {profile.availability}
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-wide2 text-textMuted">
+          {profile.location}
+        </span>
+      </motion.div>
 
-  // A handful of "year-to-date returns" — high-level wins, but
-  // written in the user's voice (not corporate).
-  // `value` (optional) + prefix/suffix feed the Counter — numbers count up
-  // when the section scrolls into view. `label` is the static fallback for
-  // ranges like "20-30%" that don't make sense to animate.
-  const returns = [
-    {
-      label: '11',
-      value: 11,
-      animateValue: true,
-      headline: 'Projects shipped',
-      blurb: 'Across AI, backend, mobile, systems, and the occasional game jam. None of them won awards. Some of them shipped.',
-    },
-    {
-      label: '20-30%',
-      value: 25,
-      animateValue: false,
-      headline: 'Latency reduction',
-      blurb: 'Tightened a high-traffic WordPress + PHP platform at Goodmorning.com. Mostly by deleting code, not adding it.',
-    },
-    {
-      label: '~90',
-      value: 90,
-      animateValue: true,
-      prefix: '~',
-      headline: 'Credits toward the SWE',
-      blurb: 'University of Alberta, Co-op, May 2027. Still passing the classes, which is the part they don\'t put on the brochure.',
-    },
-    {
-      label: '4 yrs',
-      value: 4,
-      animateValue: true,
-      suffix: ' yrs',
-      headline: 'Writing the same backend twice',
-      blurb: 'Once in Java for school, once in Python/TS for work, once in C for fun. The third one is where the muscle memory actually shows up.',
-    },
-  ];
+      <motion.h1
+        initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="font-display text-5xl font-extrabold leading-[1.0] tracking-tighter text-text sm:text-6xl lg:text-7xl"
+      >
+        Hi, I'm{' '}
+        <span className="text-gold">{profile.name.split(' ')[0]}</span>.
+        <br />
+        I ship{' '}
+        <span className="text-gold">reliable code</span>.
+      </motion.h1>
+
+      <motion.p
+        initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="max-w-2xl text-base leading-relaxed text-textMuted sm:text-lg"
+      >
+        {profile.pitch}
+      </motion.p>
+
+      <motion.div
+        initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="flex flex-wrap items-center gap-3"
+      >
+        <a href="#projects" className="btn-primary">
+          See my work →
+        </a>
+        <a href="#contact" className="btn-ghost">
+          Get in touch
+        </a>
+      </motion.div>
+    </section>
+  );
+};
+
+/* ============================================================
+   About — the longer "who I am" + quick facts
+   ============================================================ */
+const About: React.FC = () => {
+  const reducedMotion = useReducedMotion();
+  return (
+    <motion.section
+      id="about"
+      className="section-shell"
+      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-15% 0px' }}
+      transition={{ duration: 0.5 }}
+    >
+      <div>
+        <div className="section-eyebrow">// About</div>
+        <h2 className="section-title mt-2">{profile.aboutShort.split('.')[0]}.</h2>
+        <div className="gold-rule" />
+      </div>
+
+      <div className="card-surface max-w-3xl">
+        <p className="text-base leading-relaxed text-text sm:text-lg whitespace-pre-line">
+          {profile.aboutLong}
+        </p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="card-surface">
+          <div className="section-eyebrow">// Currently</div>
+          <ul className="mt-3 space-y-1.5 font-mono text-sm text-text">
+            <li>
+              <span className="text-textMuted">📚 Reading:</span>{' '}
+              <span className="text-gold">Designing Data-Intensive Apps</span>{' '}
+              <span className="text-textMuted">(again)</span>
+            </li>
+            <li>
+              <span className="text-textMuted">🛠 Building:</span>{' '}
+              <span className="text-gold">Nexstepper</span>{' '}
+              <span className="text-textMuted">(nexstepper.com)</span>
+            </li>
+            <li>
+              <span className="text-textMuted">💼 Working:</span>{' '}
+              <span className="text-gold">Dayforce</span>{' '}
+              <span className="text-textMuted">(devops intern, remote)</span>
+            </li>
+            <li>
+              <span className="text-textMuted">🎮 Playing:</span>{' '}
+              <span className="text-gold">Apex Legends</span>
+            </li>
+            <li>
+              <span className="text-textMuted">📺 Watching:</span>{' '}
+              <span className="text-gold">One Piece</span>{' '}
+              <span className="text-textMuted">+ Jujutsu Kaisen</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="card-surface">
+          <div className="section-eyebrow">// Fun Facts (unverified)</div>
+          <ul className="mt-3 space-y-1.5 font-mono text-sm text-text">
+            <li>
+              🌶️ Nigerian. Lives in Edmonton. Eats a concerning amount of
+              protein.
+            </li>
+            <li>
+              ♟️ Online chess rating:{' '}
+              <span className="text-gold">~1300</span> (still losing, just less
+              often)
+            </li>
+            <li>
+              📂 Has 3 "dotfiles" folders in <code>~/</code>, all empty
+            </li>
+            <li>
+              🎯 Long-term:{' '}
+              <span className="text-gold">
+                build cool stuff with cool people
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </motion.section>
+  );
+};
+
+/* ============================================================
+   Projects — flagship first
+   ============================================================ */
+const Projects: React.FC = () => {
+  const reducedMotion = useReducedMotion();
 
   return (
     <motion.section
-      className="section-shell gap-8"
-      variants={staggerContainer(reducedMotion)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: '-10% 0px' }}
+      id="projects"
+      className="section-shell"
+      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-15% 0px' }}
+      transition={{ duration: 0.5 }}
     >
-      {/* ============================================================
-          HERO — headline + 3D coin
-          ============================================================ */}
-      <div className="grid gap-6 lg:grid-cols-6">
-        <motion.div
-          variants={fadeUp(reducedMotion)}
-          className="card-surface relative overflow-hidden p-6 lg:col-span-4 lg:row-span-2"
-        >
-          {/* Subtle "embossed seal" in the top-right corner */}
-          <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full border-2 border-dashed border-gold/30 dark:border-goldSoft/20" />
-          <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full border border-dashed border-gold/20 dark:border-goldSoft/15" />
+      <div>
+        <div className="section-eyebrow">// Projects</div>
+        <h2 className="section-title mt-2">
+          The ones I'd point at in an interview.
+        </h2>
+        <div className="gold-rule" />
+        <p className="section-subtitle mt-4">
+          Production builds, shipped games, and a few things I'm proud of even
+          if they never made it past a hackathon.
+        </p>
+      </div>
 
-          <div className="relative z-10 flex h-full flex-col gap-6 lg:flex-row lg:items-center">
-            <div className="flex-1 space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-goldInk dark:border-goldSoft/40 dark:bg-goldSoft/10 dark:text-goldSoft">
-                {profile.availability}
-              </div>
-              <div className="space-y-3">
-                <h1 className="font-display text-4xl font-bold leading-tight text-vault sm:text-5xl dark:text-parchment">
-                  {profile.name}
-                  <span className="mt-2 block font-display text-xl font-medium italic text-inkSoft sm:text-2xl dark:text-parchment/80">
-                    {profile.headline}
-                  </span>
-                </h1>
-                <p className="max-w-2xl text-lg leading-relaxed text-inkSoft dark:text-parchment/80">
-                  {profile.pitch}
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <Link to="/projects" className="coin-btn">
-                  Top Holdings
-                  <ArrowIcon />
-                </Link>
-                <a className="ghost-btn" href={profile.resumeUrl} target="_blank" rel="noreferrer">
-                  View Résumé
-                </a>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Backend', 'DevOps', 'AI/ML', 'Systems', 'Mobile'].map((chip) => (
-                  <span key={chip} className="pill">
-                    {chip}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="w-full lg:w-72">
-              <div className="relative h-64 overflow-hidden rounded-xl border border-gold/30 bg-gradient-to-br from-parchmentSoft to-parchment shadow-vault dark:from-vaultInk dark:to-vaultInk">
-                <Suspense
-                  fallback={
-                    <div className="flex h-full items-center justify-center font-mono text-xs uppercase tracking-wider text-goldInk dark:text-goldSoft">
-                      Loading the gold…
-                    </div>
-                  }
-                >
-                  <HeroCanvas monogram={profile.monogram} reducedMotion={!!reducedMotion} />
-                </Suspense>
-              </div>
-              <div className="mt-2 text-center font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
-                ◆ 1 {profile.monogram} COIN · EST. 2003 · 21 GRAMS OF GOOD JUDGMENT ◆
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Profile card — the "account holder" */}
-        <motion.div
-          variants={fadeUp(reducedMotion)}
-          className="card-surface relative overflow-hidden p-4 lg:col-span-2 lg:row-span-2"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-gold/5" />
-          <div className="relative z-10 space-y-4">
-            <img
-              src="/assets/profile-pic.png"
-              alt={profile.name}
-              className="h-64 w-full rounded-lg border border-vault/20 object-cover shadow-emboss dark:border-gold/20"
-            />
-            <div className="space-y-1">
-              <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
-                Account Holder
-              </div>
-              <div className="font-mono text-sm font-semibold text-ink dark:text-parchment">
-                {profile.location}
-              </div>
-            </div>
-            <div className="border-t border-vault/15 pt-3 dark:border-gold/15">
-              <div className="font-mono text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
-                Status
-              </div>
-              <div className="mt-1 flex items-center gap-2 text-sm text-ink dark:text-parchment">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success/60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
-                </span>
-                Open to full-time · S27
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ============================================================
-            YEAR-TO-DATE RETURNS — the "Proof" section
-            ============================================================ */}
-        <motion.div variants={fadeUp(reducedMotion)} className="card-surface p-6 lg:col-span-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="section-eyebrow">Year-to-date returns</div>
-              <h3 className="mt-1 font-display text-2xl font-semibold text-vault dark:text-parchment">
-                The part the brokers like to gloss over
-              </h3>
-              <div className="ledger-rule mt-2" />
-            </div>
-            <div className="hidden font-mono text-[10px] uppercase tracking-ledger text-goldInk sm:block dark:text-goldSoft">
-              Q1 → Q2 2026 · 21 yrs old
-            </div>
-          </div>
-
-          <div className="mt-5 grid gap-px overflow-hidden rounded-lg border border-vault/15 bg-vault/10 sm:grid-cols-2 lg:grid-cols-4 dark:border-gold/15 dark:bg-gold/10">
-            {returns.map((ret, i) => (
-              <div
-                key={i}
-                className="bg-parchmentSoft/95 p-5 transition hover:bg-parchmentSoft dark:bg-vaultInk/95 dark:hover:bg-vaultInk"
-              >
-                <div className="font-display text-3xl font-bold text-goldInk dark:text-goldSoft tabular">
-                  {ret.animateValue ? (
-                    <Counter
-                      value={ret.value}
-                      prefix={ret.prefix}
-                      suffix={ret.suffix}
-                      duration={1.2}
-                    />
-                  ) : (
-                    ret.label
+      <div className="grid gap-4 md:grid-cols-2">
+        {projects.map((project, i) => (
+          <motion.article
+            key={project.id}
+            initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+            whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-10% 0px' }}
+            transition={{ duration: 0.4, delay: i * 0.05 }}
+            className={`card-surface group flex flex-col gap-4 transition hover:border-gold/40 ${
+              project.featured ? 'md:col-span-2' : ''
+            }`}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-display text-xl font-bold text-text group-hover:text-gold">
+                    {project.title}
+                  </h3>
+                  {project.status && (
+                    <span className="pill-gold !text-[9px]">
+                      {project.status}
+                    </span>
                   )}
                 </div>
-                <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-vault dark:text-parchment">
-                  {ret.headline}
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-inkSoft dark:text-parchment/80">
-                  {ret.blurb}
+                <p className="mt-1.5 text-sm leading-relaxed text-textMuted">
+                  {project.summary}
                 </p>
               </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ============================================================
-            TOP HOLDINGS — the "Featured" projects
-            ============================================================ */}
-        <motion.div variants={fadeUp(reducedMotion)} className="card-surface p-6 lg:col-span-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="section-eyebrow">Top holdings</div>
-              <h3 className="mt-1 font-display text-2xl font-semibold text-vault dark:text-parchment">
-                The ones I'd point at in an interview
-              </h3>
-              <div className="ledger-rule mt-2" />
             </div>
-            <Link
-              to="/projects"
-              className="font-mono text-xs font-semibold uppercase tracking-wider text-goldInk transition hover:text-gold dark:text-goldSoft dark:hover:text-gold"
-            >
-              See all 11 →
-            </Link>
-          </div>
-          <div className="mt-5 space-y-4">
-            {featuredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="rounded-lg border border-vault/15 bg-parchment/60 p-4 transition hover:border-gold/40 dark:border-gold/15 dark:bg-vaultInk/60"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <div className="font-mono text-[10px] uppercase tracking-wider text-goldInk dark:text-goldSoft">
-                      {project.status ?? 'Active'} · {project.tags[0]}
-                    </div>
-                    <div className="mt-1 font-display text-lg font-semibold text-vault dark:text-parchment">
-                      {project.title}
-                    </div>
-                    <p className="mt-1 text-sm text-inkSoft dark:text-parchment/80">
-                      {project.summary}
-                    </p>
-                  </div>
-                  <Link
-                    to="/projects"
-                    className="shrink-0 rounded-full border border-vault/30 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-vault transition hover:border-gold hover:text-goldInk dark:border-gold/30 dark:text-parchment dark:hover:border-goldSoft dark:hover:text-goldSoft"
+
+            {project.whatIDid && project.whatIDid.length > 0 && (
+              <ul className="space-y-1 text-sm text-text">
+                {project.whatIDid.map((item, idx) => (
+                  <li key={idx} className="flex gap-2">
+                    <span className="text-gold">▸</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-2">
+              {project.tags.map((tag) => (
+                <span key={tag} className="pill">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {project.links.length > 0 && (
+              <div className="flex flex-wrap items-center gap-3 border-t border-border pt-3">
+                {project.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-mono text-xs uppercase tracking-wide2 text-gold transition hover:text-goldSoft"
                   >
-                    Open file
-                  </Link>
-                </div>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {project.tags.slice(0, 4).map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-vault/20 bg-parchment/70 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-vault dark:border-gold/20 dark:bg-vaultInk/60 dark:text-parchment"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ============================================================
-            WHAT I'M WORKING ON — the "Now" section
-            ============================================================ */}
-        <motion.div variants={fadeUp(reducedMotion)} className="card-surface p-6 lg:col-span-2">
-          <div className="section-eyebrow">Current investments</div>
-          <h3 className="mt-1 font-display text-2xl font-semibold text-vault dark:text-parchment">
-            What I'm putting time into
-          </h3>
-          <div className="ledger-rule mt-2" />
-          <p className="mt-4 text-sm leading-relaxed text-inkSoft dark:text-parchment/80">
-            Polishing{' '}
-            <Link to="/projects" className="font-semibold text-goldInk hover:text-gold dark:text-goldSoft dark:hover:text-gold">
-              Nextep
-            </Link>
-            , the resume + job-tracking tool, until it stops embarrassing me. Reading more systems code than I write. Trying to ship one side project a quarter (so far in Q2: zero, so don't check the math).
-          </p>
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {['AI workflows', 'Backend', 'DevOps', 'Testing', 'Documentation'].map((chip) => (
-              <span key={chip} className="pill">
-                {chip}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ============================================================
-            WIRE DETAILS — the "Connect" section
-            ============================================================ */}
-        <motion.div variants={fadeUp(reducedMotion)} className="card-surface p-6 lg:col-span-6">
-          <div className="section-eyebrow">Wire details</div>
-          <h3 className="mt-1 font-display text-2xl font-semibold text-vault dark:text-parchment">
-            How to actually reach me
-          </h3>
-          <div className="ledger-rule mt-2" />
-
-          <div className="mt-5 grid gap-4 lg:grid-cols-[1.1fr_1fr]">
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center gap-3">
-                {github && (
-                  <a className="coin-btn" href={github} target="_blank" rel="noreferrer">
-                    <GithubIcon /> GitHub
+                    {link.label} <span aria-hidden>↗</span>
                   </a>
-                )}
-                {linkedin && (
-                  <a className="coin-btn" href={linkedin} target="_blank" rel="noreferrer">
-                    <LinkedInIcon /> LinkedIn
-                  </a>
-                )}
-                <Link to="/contact" className="ghost-btn">
-                  Full wire form →
-                </Link>
+                ))}
               </div>
-              <div className="rounded-lg border border-dashed border-gold/40 bg-gold/5 p-4 font-mono text-sm leading-relaxed text-vault dark:border-goldSoft/30 dark:bg-goldSoft/5 dark:text-parchment">
-                <div className="text-[10px] uppercase tracking-ledger text-goldInk dark:text-goldSoft">
-                  Quote of the session
-                </div>
-                <div className="mt-2 italic">
-                  "I ship measurable, testable systems with clean architecture and fast iteration loops. (I also over-document, in case you were worried.)"
-                </div>
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-lg border border-vault/15 bg-parchment/60 p-5 font-mono text-sm dark:border-gold/15 dark:bg-vaultInk/60">
-              <div className="mb-3 flex items-center justify-between border-b border-vault/20 pb-2 text-[10px] uppercase tracking-ledger text-goldInk dark:border-gold/20 dark:text-goldSoft">
-                <span>End-of-day summary</span>
-                <span className="tabular">USD · CA$</span>
-              </div>
-              <div className="space-y-1.5 tabular">
-                <div className="flex justify-between">
-                  <span className="text-inkSoft dark:text-parchment/70">Coffee drunk</span>
-                  <span className="text-vault dark:text-parchment">3 cups · $7.50</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-inkSoft dark:text-parchment/70">Bugs shipped</span>
-                  <span className="text-vault dark:text-parchment">2 · $0.00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-inkSoft dark:text-parchment/70">Tests passing</span>
-                  <span className="text-success">+5 · ROI ↑</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-inkSoft dark:text-parchment/70">Hours procrastinating</span>
-                  <span className="text-danger">−1.5 · lossy</span>
-                </div>
-                <div className="flex justify-between border-t border-vault/20 pt-2 dark:border-gold/20">
-                  <span className="font-semibold text-vault dark:text-parchment">Net worth</span>
-                  <span className="font-semibold text-goldInk dark:text-goldSoft">↑ 1 fun day</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+            )}
+          </motion.article>
+        ))}
       </div>
     </motion.section>
+  );
+};
+
+/* ============================================================
+   Experience — timeline
+   ============================================================ */
+const Experience: React.FC = () => {
+  const reducedMotion = useReducedMotion();
+
+  return (
+    <motion.section
+      id="experience"
+      className="section-shell"
+      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-15% 0px' }}
+      transition={{ duration: 0.5 }}
+    >
+      <div>
+        <div className="section-eyebrow">// Experience</div>
+        <h2 className="section-title mt-2">Where I've worked.</h2>
+        <div className="gold-rule" />
+        <p className="section-subtitle mt-4">
+          Internships + co-ops + leadership. Recency-weighted, with the boring
+          parts emphasized.
+        </p>
+      </div>
+
+      <div className="relative space-y-6 border-l border-border pl-6 sm:pl-8">
+        {experiences.map((exp, i) => (
+          <motion.div
+            key={i}
+            initial={reducedMotion ? false : { opacity: 0, x: -8 }}
+            whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-10% 0px' }}
+            transition={{ duration: 0.4, delay: i * 0.05 }}
+            className="relative"
+          >
+            <div className="absolute -left-[33px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-bg bg-gold sm:-left-[41px]" />
+            <div className="card-surface">
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <div className="font-display text-lg font-bold text-text">
+                    {exp.role}
+                  </div>
+                  <div className="mt-0.5 font-mono text-sm text-gold">
+                    {exp.company}
+                  </div>
+                </div>
+                <div className="font-mono text-xs text-textMuted">
+                  {exp.period} · {exp.location}
+                </div>
+              </div>
+              <p className="mt-2 text-sm text-textMuted">{exp.summary}</p>
+              {exp.highlights.length > 0 && (
+                <ul className="mt-3 space-y-1.5 text-sm text-text">
+                  {exp.highlights.map((h, idx) => (
+                    <li key={idx} className="flex gap-2">
+                      <span className="text-gold">▸</span>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.section>
+  );
+};
+
+/* ============================================================
+   Contact — clean, single card
+   ============================================================ */
+const Contact: React.FC = () => {
+  const reducedMotion = useReducedMotion();
+  return (
+    <motion.section
+      id="contact"
+      className="section-shell"
+      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-15% 0px' }}
+      transition={{ duration: 0.5 }}
+    >
+      <div>
+        <div className="section-eyebrow">// Contact</div>
+        <h2 className="section-title mt-2">
+          Let's build something <span className="text-gold">cool</span>.
+        </h2>
+        <div className="gold-rule" />
+      </div>
+
+      <div className="card-surface grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+        <div className="space-y-4">
+          <p className="text-base leading-relaxed text-text sm:text-lg">
+            Open to full-time SWE roles starting{' '}
+            <span className="text-gold">May 2027</span>, interesting co-op /
+            contract projects, and anime recommendations. (The last one
+            especially.)
+          </p>
+
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a
+              href={`mailto:${profile.emailPersonal}`}
+              className="btn-primary"
+            >
+              {profile.emailPersonal}
+            </a>
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-ghost"
+            >
+              Résumé <span aria-hidden>↗</span>
+            </a>
+          </div>
+
+          <p className="text-xs text-textMuted">
+            Or DM me on LinkedIn / GitHub. I respond faster than I commit, which
+            is saying something.
+          </p>
+        </div>
+
+        <div className="overflow-hidden rounded-lg border border-border bg-bg/60 p-5 font-mono text-sm">
+          <div className="mb-3 flex items-center justify-between border-b border-border pb-2 text-[10px] uppercase tracking-wide2 text-textMuted">
+            <span>// request.log</span>
+            <span className="text-gold">2XX OK</span>
+          </div>
+          <pre className="overflow-x-auto text-text leading-relaxed">{`GET /collaboration
+→ 200 OK
+
+GET /anime-recs
+→ 200 OK
+→ payload: [
+    "Frieren",
+    "Dungeon Meshi",
+    "Bocchi the Rock!",
+    "Mob Psycho 100"
+  ]
+
+POST /hire-diepreye
+→ 202 Accepted
+→ (he's reading it)`}</pre>
+        </div>
+      </div>
+    </motion.section>
+  );
+};
+
+/* ============================================================
+   Home — single-page scroll
+   ============================================================ */
+const Home: React.FC = () => {
+  return (
+    <div>
+      <Hero />
+      <About />
+      <Projects />
+      <Experience />
+      <CharacterSheet skillGroups={skillGroups} />
+      <Contact />
+    </div>
   );
 };
 

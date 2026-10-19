@@ -3,23 +3,23 @@
 @tailwind utilities;
 
 /* ============================================================
-   DiepreyeCD portfolio — minimal dark + gold + terminal shell
+   DiepreyeCD portfolio — minimal neutral + single gold accent
    ============================================================ */
 
 :root {
   color-scheme: dark;
-  --bg-base: #0a0a14;
-  --bg-surface: #13131f;
-  --bg-raised: #1a1a2a;
-  --text-primary: #f0f0ff;
-  --text-muted: #8a8aa8;
-  --text-subtle: #5a5a78;
-  --border-color: #2a2a40;
+  --bg-base: #0a0a0a;
+  --bg-surface: #111111;
+  --bg-raised: #161616;
+  --text-primary: #ededed;
+  --text-muted: #9a9a9a;
+  --text-subtle: #6a6a6a;
+  --border-color: #222222;
   --accent: #FFB300;
   --accent-soft: #FFD980;
   --accent-ink: #7a5a00;
-  --terminal-ok: #4ADE80;
-  --terminal-err: #FF6B6B;
+  --terminal-ok: #9a9a9a;
+  --terminal-err: #cc6666;
 }
 
 html {
@@ -179,7 +179,7 @@ a:focus-visible {
 }
 
 /* Eyebrow that looks like a typed command, e.g.
-   <span class="section-eyebrow"><span class="shell-prompt">$</span> cd ./projects</span> */
+  <span class="section-eyebrow"><span class="shell-prompt">$</span> cd ./projects</span> */
 .eyebrow-cmd {
   @apply font-mono text-sm;
 }
@@ -197,7 +197,7 @@ a:focus-visible {
 
 /* Box-drawing card border */
 .tty-box {
-  border: 1px solid theme('colors.border');
+  border: 1px solid #222222;
   position: relative;
 }
 
@@ -208,7 +208,7 @@ a:focus-visible {
   left: 12px;
   right: 12px;
   height: 1px;
-  background: #13131f;
+  background: #111111;
 }
 
 /* Subtle scanline overlay — barely visible, just a hint of texture */
@@ -252,8 +252,8 @@ a:focus-visible {
 
 /* Terminal output line colors */
 .tty-out-echo { @apply text-text; }
-.tty-out-ok { @apply text-[#4ADE80]; }
-.tty-out-err { @apply text-[#FF6B6B]; }
+.tty-out-ok { @apply text-textMuted; }
+.tty-out-err { @apply text-[#cc6666]; }
 .tty-out-dim { @apply text-textMuted; }
 .tty-out-accent { @apply text-gold; }
 

@@ -145,8 +145,8 @@ const About: React.FC = () => {
             </li>
             <li>
               ♟️ Online chess rating:{' '}
-              <span className="text-gold">~1300</span> (still losing, just less
-              often)
+              <span className="text-gold">~900</span> (still learning, still
+              losing)
             </li>
             <li>
               📂 Has 3 "dotfiles" folders in <code>~/</code>, all empty

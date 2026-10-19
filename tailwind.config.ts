@@ -6,23 +6,21 @@ const config: Config = {
   theme: {
     extend: {
       // ============================================================
-      // Minimal dark + gold palette
+      // Minimal neutral palette — single gold accent
       //
-      //   - bg (near-black, blue-tinted)
-      //   - surface (slightly raised)
-      //   - text (off-white, not pure white)
-      //   - textMuted (gray for body copy)
-      //   - border (subtle)
-      //   - gold (#FFB300) — the only accent
+      //   Backgrounds: pure neutral grayscale (no blue tint)
+      //   Text: off-white, gray scale (no purple)
+      //   Border: barely-there line
+      //   Gold (#FFB300): the ONLY chromatic accent
       // ============================================================
       colors: {
-        bg: '#0a0a14',
-        surface: '#13131f',
-        surfaceRaised: '#1a1a2a',
-        text: '#f0f0ff',
-        textMuted: '#8a8aa8',
-        textSubtle: '#5a5a78',
-        border: '#2a2a40',
+        bg: '#0a0a0a',
+        surface: '#111111',
+        surfaceRaised: '#161616',
+        text: '#ededed',
+        textMuted: '#9a9a9a',
+        textSubtle: '#6a6a6a',
+        border: '#222222',
         gold: '#FFB300',
         goldSoft: '#FFD980',
         goldInk: '#7a5a00',
@@ -42,8 +40,8 @@ const config: Config = {
         wide3: '0.30em',
       },
       boxShadow: {
-        soft: '0 8px 30px rgba(0, 0, 0, 0.4)',
-        goldGlow: '0 0 24px rgba(255, 179, 0, 0.15)',
+        soft: '0 8px 30px rgba(0, 0, 0, 0.5)',
+        goldGlow: '0 0 18px rgba(255, 179, 0, 0.10)',
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

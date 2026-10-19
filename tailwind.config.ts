@@ -29,11 +29,12 @@ const config: Config = {
       },
       fontFamily: {
         // Display: a clean, modern sans (Inter) for hero
-        // Body: same Inter for cohesion
-        // Mono: JetBrains Mono for code/tech bits
+        // Body: same Inter for prose readability
+        // Mono / shell: JetBrains Mono for shell bits, code, RPG bars
         display: ['Inter', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'Menlo', 'monospace'],
+        shell: ['"JetBrains Mono"', 'Menlo', 'monospace'],
       },
       letterSpacing: {
         // Wide tracking for uppercase eyebrows

@@ -78,13 +78,16 @@ const About: React.FC = () => {
     <motion.section
       id="about"
       className="section-shell"
-      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      initial={false}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
-        <div className="section-eyebrow">// About</div>
+        <div className="eyebrow-cmd">
+          <span className="shell-prompt">~ $</span> <span className="text-text">cd</span>{' '}
+          <span className="text-gold">./about</span>
+        </div>
         <h2 className="section-title mt-2">{profile.aboutShort.split('.')[0]}.</h2>
         <div className="gold-rule" />
       </div>
@@ -97,7 +100,10 @@ const About: React.FC = () => {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="card-surface">
-          <div className="section-eyebrow">// Currently</div>
+          <div className="eyebrow-cmd">
+            <span className="shell-prompt-secondary">//</span>{' '}
+            <span className="text-textMuted">currently</span>
+          </div>
           <ul className="mt-3 space-y-1.5 font-mono text-sm text-text">
             <li>
               <span className="text-textMuted">📚 Reading:</span>{' '}
@@ -127,7 +133,11 @@ const About: React.FC = () => {
         </div>
 
         <div className="card-surface">
-          <div className="section-eyebrow">// Fun Facts (unverified)</div>
+          <div className="eyebrow-cmd">
+            <span className="shell-prompt-secondary">//</span>{' '}
+            <span className="text-textMuted">fun_facts</span>
+            <span className="text-textSubtle">.txt</span>
+          </div>
           <ul className="mt-3 space-y-1.5 font-mono text-sm text-text">
             <li>
               🌶️ Nigerian. Lives in Edmonton. Eats a concerning amount of
@@ -164,13 +174,17 @@ const Projects: React.FC = () => {
     <motion.section
       id="projects"
       className="section-shell"
-      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      initial={false}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
-        <div className="section-eyebrow">// Projects</div>
+        <div className="eyebrow-cmd">
+          <span className="shell-prompt">~ $</span> <span className="text-text">ls</span>{' '}
+          <span className="text-gold">./projects</span>
+          <span className="text-textMuted"> --featured</span>
+        </div>
         <h2 className="section-title mt-2">
           The ones I'd point at in an interview.
         </h2>
@@ -185,7 +199,7 @@ const Projects: React.FC = () => {
         {projects.map((project, i) => (
           <motion.article
             key={project.id}
-            initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+            initial={false}
             whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.4, delay: i * 0.05 }}
@@ -262,13 +276,16 @@ const Experience: React.FC = () => {
     <motion.section
       id="experience"
       className="section-shell"
-      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      initial={false}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
-        <div className="section-eyebrow">// Experience</div>
+        <div className="eyebrow-cmd">
+          <span className="shell-prompt">~ $</span> <span className="text-text">cat</span>{' '}
+          <span className="text-gold">./experience.log</span>
+        </div>
         <h2 className="section-title mt-2">Where I've worked.</h2>
         <div className="gold-rule" />
         <p className="section-subtitle mt-4">
@@ -281,7 +298,7 @@ const Experience: React.FC = () => {
         {experiences.map((exp, i) => (
           <motion.div
             key={i}
-            initial={reducedMotion ? false : { opacity: 0, x: -8 }}
+            initial={false}
             whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.4, delay: i * 0.05 }}
@@ -330,13 +347,16 @@ const Contact: React.FC = () => {
     <motion.section
       id="contact"
       className="section-shell"
-      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      initial={false}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
-        <div className="section-eyebrow">// Contact</div>
+        <div className="eyebrow-cmd">
+          <span className="shell-prompt">~ $</span> <span className="text-text">ping</span>{' '}
+          <span className="text-gold">diepreye@dev</span>
+        </div>
         <h2 className="section-title mt-2">
           Let's build something <span className="text-gold">cool</span>.
         </h2>

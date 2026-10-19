@@ -112,13 +112,16 @@ const CharacterSheet: React.FC<Props> = ({ skillGroups }) => {
     <motion.section
       id="stats"
       className="section-shell"
-      initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+      initial={false}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
-        <div className="section-eyebrow">// Character Sheet</div>
+        <div className="eyebrow-cmd">
+          <span className="shell-prompt">~ $</span> <span className="text-text">stat</span>{' '}
+          <span className="text-gold">./diepreye</span>
+        </div>
         <h2 className="section-title mt-2">
           The <span className="text-gold">stats</span> behind the résumé.
         </h2>

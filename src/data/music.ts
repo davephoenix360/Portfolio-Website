@@ -14,9 +14,9 @@
    ============================================================ */
 
 export const playlist = {
-  // The "Chill Lo-Fi Study Beats" Spotify editorial playlist.
+  // Spotify editorial "Chill R&B" playlist.
   // Swap this for your own playlist whenever you want.
   spotifyEmbedUrl:
-    'https://open.spotify.com/embed/playlist/37i9dQZF1FwUbD6Jsl7VNR?utm_source=generator&si=e6566c6cf4e14cc1',
-  displayName: 'Chill Lo-Fi',
+    'https://open.spotify.com/embed/playlist/37i9dQZF1FOWu8jolY8N3P?utm_source=generator',
+  displayName: 'Chill Calm R&B',
 };

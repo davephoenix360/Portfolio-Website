@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import TTYBar from './components/TTYBar';
 import Terminal from './components/Terminal';
+import MusicPlayer from './components/MusicPlayer';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       </main>
       <Footer />
       <Terminal />
+      <MusicPlayer />
     </div>
   );
 };

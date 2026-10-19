@@ -53,6 +53,112 @@ const PROJECT_BY_ID: Record<string, (typeof projects)[number]> = projects.reduce
   {} as Record<string, (typeof projects)[number]>,
 );
 
+/* ============================================================
+   TerminalButton — the floating, animated launcher.
+
+   Goals:
+   1. Pull the eye — the terminal is a hidden feature, the
+      button is the only way to find it.
+   2. Stay on-brand — uses the same shell aesthetic, not a
+      stock "click me" CTA.
+   3. Don't be annoying — animations respect reduced-motion
+      and pause when the terminal is already open.
+   ============================================================ */
+
+const TIP_MESSAGES = [
+  'try "help"',
+  'cat nexstepper',
+  'cd ./projects',
+  'whoami',
+  'click me',
+  'type something',
+];
+
+interface TerminalButtonProps {
+  open: boolean;
+  onToggle: () => void;
+  reducedMotion: boolean | null;
+}
+
+const TerminalButton: React.FC<TerminalButtonProps> = ({
+  open,
+  onToggle,
+  reducedMotion,
+}) => {
+  // Cycling typed-message animation
+  const [msgIndex, setMsgIndex] = useState(0);
+  const [typed, setTyped] = useState('');
+  const [phase, setPhase] = useState<'typing' | 'pausing' | 'deleting'>('typing');
+
+  // One-time attention pulse on mount
+  const [justMounted, setJustMounted] = useState(true);
+  useEffect(() => {
+    if (reducedMotion) return;
+    const t = setTimeout(() => setJustMounted(false), 1400);
+    return () => clearTimeout(t);
+  }, [reducedMotion]);
+
+  // Typing cycle — pause animation while terminal is open
+  useEffect(() => {
+    if (reducedMotion || open) return;
+    const target = TIP_MESSAGES[msgIndex];
+    const isTyping = phase === 'typing';
+    const isDeleting = phase === 'deleting';
+
+    const delay = isTyping
+      ? 75 + Math.random() * 40 // human-ish typing jitter
+      : isDeleting
+      ? 35
+      : 0;
+
+    const timeout = setTimeout(() => {
+      if (phase === 'typing') {
+        const next = target.slice(0, typed.length + 1);
+        setTyped(next);
+        if (next === target) {
+          setTimeout(() => setPhase('pausing'), 0);
+        }
+      } else if (phase === 'pausing') {
+        // Hold the full message for a beat, then start deleting
+        setTimeout(() => setPhase('deleting'), 1400);
+      } else if (phase === 'deleting') {
+        const next = target.slice(0, typed.length - 1);
+        setTyped(next);
+        if (next === '') {
+          setMsgIndex((i) => (i + 1) % TIP_MESSAGES.length);
+          setPhase('typing');
+        }
+      }
+    }, delay || (phase === 'pausing' ? 1400 : 0));
+
+    return () => clearTimeout(timeout);
+  }, [typed, phase, msgIndex, open, reducedMotion]);
+
+  // When terminal opens, snap to a static message
+  const labelText = reducedMotion
+    ? TIP_MESSAGES[0]
+    : open
+    ? TIP_MESSAGES[msgIndex]
+    : typed;
+
+  return (
+    <button
+      onClick={onToggle}
+      aria-label={open ? 'Close terminal' : 'Open terminal'}
+      className={`tty-launcher fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-bg/90 px-4 py-2.5 font-mono text-xs uppercase tracking-wide2 text-gold shadow-goldGlow backdrop-blur transition-[border-color,background-color,box-shadow] duration-200 hover:border-gold hover:bg-surface ${
+        justMounted ? 'tty-launcher-intro' : ''
+      } ${open ? 'tty-launcher-active' : ''}`}
+    >
+      <span>&gt;_</span>
+      <span className="hidden sm:inline-block sm:min-w-[140px]">
+        {labelText}
+        {!reducedMotion && !open && <span className="tty-launcher-caret" aria-hidden="true" />}
+      </span>
+      <span className="ml-1 hidden h-1.5 w-1.5 animate-pulse rounded-full bg-gold sm:inline-block" />
+    </button>
+  );
+};
+
 const Terminal: React.FC = () => {
   const reducedMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
@@ -407,16 +513,12 @@ const Terminal: React.FC = () => {
 
   return (
     <>
-      {/* Floating button */}
-      <button
-        onClick={() => setOpen((o) => !o)}
-        aria-label="Open terminal"
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-bg/90 px-4 py-2.5 font-mono text-xs uppercase tracking-wide2 text-gold shadow-goldGlow backdrop-blur transition hover:border-gold hover:bg-surface"
-      >
-        <span>&gt;_</span>
-        <span className="hidden sm:inline">terminal</span>
-        <span className="ml-1 hidden h-1.5 w-1.5 animate-pulse rounded-full bg-gold sm:inline-block" />
-      </button>
+      {/* Floating button — animated to draw attention */}
+      <TerminalButton
+        open={open}
+        onToggle={() => setOpen((o) => !o)}
+        reducedMotion={reducedMotion}
+      />
 
       {/* Modal */}
       <AnimatePresence>

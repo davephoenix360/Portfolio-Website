@@ -749,6 +749,23 @@ a:focus-visible {
   padding-top: 8px;
 }
 
+/* ============================================================
+   Spotify embed wrapper
+   ============================================================ */
+
+.music-spotify-wrap {
+  margin: 0 -2px;  /* let the iframe fill the panel minus a hair of padding */
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000; /* matches Spotify's default embed bg */
+}
+
+.music-spotify-iframe {
+  display: block;
+  border: 0;
+  border-radius: 8px;
+}
+
 @media (max-width: 480px) {
   .music-panel {
     width: calc(100vw - 2.5rem);

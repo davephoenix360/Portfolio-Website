@@ -1,21 +1,22 @@
 /* ============================================================
-   Music — the chill background playlist for the portfolio.
+   Music — the background playlist for the portfolio.
 
-   Drop MP3/.ogg/.m4a files into /public/music/ and add an entry
-   below. The player will pick them up automatically.
+   Uses a Spotify embed iframe so we don't have to host the
+   audio files ourselves. Spotify handles all the audio,
+   bandwidth, and controls.
 
-   See /public/music/README.md for the full instructions.
+   To swap the playlist:
+   1. Open your Spotify playlist
+   2. Click "..." → "Share" → "Embed playlist"
+   3. Copy the iframe src URL (looks like:
+      https://open.spotify.com/embed/playlist/XXXXX?...)
+   4. Paste it below as `spotifyEmbedUrl`
    ============================================================ */
 
-export type Track = {
-  id: string;
-  file: string;   // path under /music/ (e.g. "lofi-1.mp3")
-  title: string;  // display title
-  artist: string; // display artist
+export const playlist = {
+  // The "Chill Lo-Fi Study Beats" Spotify editorial playlist.
+  // Swap this for your own playlist whenever you want.
+  spotifyEmbedUrl:
+    'https://open.spotify.com/embed/playlist/37i9dQZF1FwUbD6Jsl7VNR?utm_source=generator&si=e6566c6cf4e14cc1',
+  displayName: 'Chill Lo-Fi',
 };
-
-export const tracks: Track[] = [
-  // Example entry — replace with your real tracks:
-  // { id: 'lofi-1', file: 'lofi-beats-1.mp3', title: 'Coffee Shop',  artist: 'Lo-Fi Beats' },
-  // { id: 'lofi-2', file: 'lofi-beats-2.mp3', title: 'Rainy Window', artist: 'Lo-Fi Beats' },
-];

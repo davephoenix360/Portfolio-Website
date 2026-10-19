@@ -3,35 +3,21 @@
 @tailwind utilities;
 
 /* ============================================================
-   DiepreyeCD portfolio — "old-school money" + peak UX
-   Theme tokens (light + dark) are loaded here so Tailwind
-   utility classes can use them.
+   DiepreyeCD portfolio — minimal dark + gold
    ============================================================ */
 
 :root {
-  color-scheme: light;
-  --bg-base: #F4ECD8;
-  --bg-surface: #FBF6E7;
-  --bg-ink: #1A1A1A;
-  --bg-vault: #0F4C3A;
-  --bg-gold: #B8860B;
-  --bg-glow-1: rgba(15, 76, 58, 0.10);
-  --bg-glow-2: rgba(184, 134, 11, 0.07);
-  --noise-opacity: 0.05;
-  --ledger-line: rgba(15, 76, 58, 0.05);
-}
-
-.dark {
   color-scheme: dark;
-  --bg-base: #0A1F18;
-  --bg-surface: #0F2A20;
-  --bg-ink: #F0EAD6;
-  --bg-vault: #1B5E48;
-  --bg-gold: #D4AF37;
-  --bg-glow-1: rgba(27, 94, 72, 0.35);
-  --bg-glow-2: rgba(212, 175, 55, 0.10);
-  --noise-opacity: 0.08;
-  --ledger-line: rgba(212, 175, 55, 0.06);
+  --bg-base: #0a0a14;
+  --bg-surface: #13131f;
+  --bg-raised: #1a1a2a;
+  --text-primary: #f0f0ff;
+  --text-muted: #8a8aa8;
+  --text-subtle: #5a5a78;
+  --border-color: #2a2a40;
+  --accent: #FFB300;
+  --accent-soft: #FFD980;
+  --accent-ink: #7a5a00;
 }
 
 html {
@@ -40,40 +26,11 @@ html {
 
 body {
   font-family: theme('fontFamily.body');
-  background:
-    radial-gradient(900px 600px at 5% -10%, var(--bg-glow-1), transparent 60%),
-    radial-gradient(900px 600px at 95% 10%, var(--bg-glow-2), transparent 55%),
-    var(--bg-base);
-  color: var(--bg-ink);
+  background: var(--bg-base);
+  color: var(--text-primary);
   min-height: 100vh;
-  position: relative;
-  isolation: isolate;
-  font-feature-settings: 'ss01' on, 'cv11' on;
-}
-
-.dark body {
-  color: var(--bg-ink);
-}
-
-/* Subtle paper-grain noise overlay — gives the parchment its tooth. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-  opacity: var(--noise-opacity);
-  mix-blend-mode: multiply;
-  z-index: 0;
-}
-
-.dark body::before {
-  mix-blend-mode: soft-light;
-}
-
-#root {
-  position: relative;
-  z-index: 1;
+  font-feature-settings: 'cv11' on, 'ss01' on;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -81,10 +38,10 @@ a {
   color: inherit;
 }
 
-/* Headings get the "old money" serif. */
 h1, h2, h3, .font-display {
   font-family: theme('fontFamily.display');
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 /* ============================================================
@@ -92,98 +49,69 @@ h1, h2, h3, .font-display {
    ============================================================ */
 
 .section-shell {
-  @apply mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8;
+  @apply mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 py-16 sm:px-6 lg:px-8;
 }
 
 .card-surface {
-  @apply rounded-xl border border-vault/15 bg-parchmentSoft/80 shadow-soft backdrop-blur;
+  @apply rounded-lg border border-border bg-surface/60 p-6 backdrop-blur;
 }
 
-.dark .card-surface {
-  @apply border-gold/15 bg-vaultInk/70 shadow-vault;
-}
-
-/* "Section" — the header that introduces each page */
+/* Section eyebrow — small, uppercase, monospace, gold */
 .section-eyebrow {
-  @apply font-mono text-xs uppercase tracking-ledger text-gold;
-}
-
-.dark .section-eyebrow {
-  @apply text-goldSoft;
+  @apply font-mono text-xs uppercase tracking-wide2 text-gold;
 }
 
 .section-title {
-  @apply font-display text-3xl font-bold text-vault sm:text-4xl;
+  @apply font-display text-3xl font-bold text-text sm:text-4xl;
 }
 
-.dark .section-title {
-  @apply text-parchment;
+.section-subtitle {
+  @apply max-w-2xl text-base leading-relaxed text-textMuted;
 }
 
-/* The pill — a small "ledger chip" for tags + buttons */
+/* Pill — small tag chip */
 .pill {
-  @apply inline-flex items-center gap-2 rounded-full border border-vault/25 bg-parchment px-3 py-1 font-mono text-xs uppercase tracking-wider text-vault transition hover:-translate-y-0.5 hover:border-gold hover:text-goldInk;
+  @apply inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide2 text-textMuted;
 }
 
-.dark .pill {
-  @apply border-gold/25 bg-vaultInk/60 text-goldSoft hover:border-goldSoft hover:text-goldSoft;
+.pill-gold {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide2 text-gold;
 }
 
-/* "Coin button" — primary CTA, gold like a coin face */
-.coin-btn {
-  @apply inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 font-mono text-sm font-bold uppercase tracking-wider text-parchment shadow-emboss transition hover:-translate-y-1 hover:bg-goldInk hover:shadow-vault;
+/* Primary CTA — gold filled */
+.btn-primary {
+  @apply inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wide2 text-bg transition hover:bg-goldSoft hover:shadow-goldGlow;
 }
 
-.dark .coin-btn {
-  @apply bg-goldSoft text-vaultInk hover:bg-gold;
+.btn-ghost {
+  @apply inline-flex items-center gap-2 rounded-full border border-border bg-transparent px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wide2 text-text transition hover:border-gold hover:text-gold;
 }
 
-.ghost-btn {
-  @apply inline-flex items-center gap-2 rounded-full border border-vault/40 bg-transparent px-5 py-3 font-mono text-sm font-semibold uppercase tracking-wider text-vault transition hover:-translate-y-1 hover:border-gold hover:text-goldInk;
+/* Thin gold rule under section heads */
+.gold-rule {
+  @apply mt-3 h-px w-12 bg-gold/60;
 }
 
-.dark .ghost-btn {
-  @apply border-gold/40 text-parchment hover:border-goldSoft hover:text-goldSoft;
-}
-
-/* The "ledger" rule — a thin gold line under section heads */
-.ledger-rule {
-  @apply mt-2 h-px w-16 bg-gradient-to-r from-gold via-gold/60 to-transparent;
-}
-
-.dark .ledger-rule {
-  @apply from-goldSoft via-goldSoft/60 to-transparent;
-}
-
-/* "Receipt" — the skill/holding list item */
-.receipt {
-  @apply flex items-center justify-between gap-3 border-b border-vault/10 py-3 font-mono text-sm;
-}
-
-.dark .receipt {
-  @apply border-gold/10;
-}
-
-/* Tabular numbers for the brokerage-statement look */
+/* Tabular numbers */
 .tabular {
   font-variant-numeric: tabular-nums;
 }
 
-/* Focus ring — gold, not blue, to match the theme */
+/* Focus ring — gold */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--bg-gold);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* Selection — gold on cream */
+/* Selection — gold on dark */
 ::selection {
-  background: var(--bg-gold);
+  background: var(--accent);
   color: var(--bg-base);
 }
 
-/* Scrollbar (subtle, dark + gold) */
+/* Scrollbar — dark, subtle */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -192,15 +120,45 @@ a:focus-visible {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(15, 76, 58, 0.2);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(15, 76, 58, 0.4);
+  background: rgba(255, 179, 0, 0.3);
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.2);
+
+/* ============================================================
+   RPG character-sheet specific
+   ============================================================ */
+
+.rpg-panel {
+  @apply rounded-lg border border-border bg-surfaceRaised/80 p-6 backdrop-blur;
 }
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(212, 175, 55, 0.4);
+
+.rpg-stat-label {
+  @apply font-mono text-[10px] uppercase tracking-wide2 text-textMuted;
+}
+
+.rpg-stat-value {
+  @apply font-display text-2xl font-bold text-text tabular;
+}
+
+.rpg-bar {
+  @apply h-1.5 w-full overflow-hidden rounded-full bg-border;
+}
+
+.rpg-bar-fill {
+  @apply h-full rounded-full bg-gold transition-all duration-700;
+}
+
+.rpg-achievement {
+  @apply flex items-start gap-3 rounded-md border border-border bg-surface/40 p-3;
+}
+
+.rpg-achievement-icon {
+  @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-gold/30 bg-gold/10 text-sm;
+}
+
+.rpg-achievement-locked {
+  @apply opacity-40;
 }

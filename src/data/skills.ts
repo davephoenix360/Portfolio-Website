@@ -5,83 +5,65 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Programming Languages',
-    items: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C', 'C++', 'C#', 'SQL', 'Bash'],
+    title: 'Languages',
+    items: ['TypeScript', 'JavaScript', 'Python', 'C#', 'SQL', 'C', 'Bash', 'Java'],
   },
 
   {
     title: 'Backend & Systems',
     items: [
+      'ASP.NET Core',
       'Node.js',
-      'FastAPI',
-      'REST API Design',
-      'Authentication & Authorization',
+      'REST API design',
       'PostgreSQL',
+      'Microsoft SQL Server',
       'MySQL',
       'SQLite',
       'Linux',
-      'Concurrency & Synchronization',
-      'Virtual Memory Concepts',
+      'Concurrency & synchronization',
     ],
   },
 
   {
-    title: 'AI / ML & Data',
+    title: 'AI / ML',
     items: [
-      'Large Language Models (LLMs)',
+      'OpenAI / Groq APIs',
       'LangChain',
       'Retrieval-Augmented Generation (RAG)',
       'Hugging Face Transformers',
       'PyTorch',
       'scikit-learn',
-      'NLP Pipelines',
-      'Model Evaluation (Precision / Recall / F1)',
-      'Data Processing (Pandas, NumPy)',
+      'Pandas / NumPy',
     ],
   },
 
   {
     title: 'Frontend & Mobile',
-    items: ['React', 'Next.js', 'HTML', 'CSS', 'Tailwind CSS', 'Android (Java)', 'Unity'],
+    items: ['React', 'Next.js', 'Tailwind CSS', 'Material UI', 'Android (Java)', 'Unity'],
   },
 
   {
     title: 'Cloud, DevOps & Tooling',
     items: [
-      'AWS Lambda',
-      'Google Cloud APIs',
+      'AWS',
+      'Google Cloud',
       'Firebase (Firestore, Storage)',
       'Docker',
       'Git & GitHub',
       'GitHub Actions',
-      'CI/CD Pipelines',
-      'Linux-based Development',
+      'CI/CD pipelines',
+      'Vercel',
     ],
   },
 
   {
     title: 'Testing & Quality',
     items: [
-      'Unit Testing',
-      'Integration Testing',
-      'UI Testing',
-      'JUnit',
+      'Unit testing',
+      'Integration testing',
       'Espresso',
-      'Test Automation',
-      'Debugging & Instrumentation',
-    ],
-  },
-
-  {
-    title: 'Developer Tools & Platforms',
-    items: [
-      'Chrome Extensions (Manifest V3)',
-      'WordPress / PHP',
-      'Google Apps Script',
-      'Android Studio',
-      'Firebase Console',
-      'Vercel',
-      'Netlify',
+      'JUnit',
+      'Test automation',
     ],
   },
 ];

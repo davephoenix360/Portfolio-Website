@@ -14,9 +14,9 @@
    ============================================================ */
 
 export const playlist = {
-  // Spotify editorial "Chill R&B" playlist.
-  // Swap this for your own playlist whenever you want.
+  // User's personal Spotify playlist — calm chill R&B.
+  // To swap, paste a new "Share → Embed playlist" iframe src below.
   spotifyEmbedUrl:
-    'https://open.spotify.com/embed/playlist/37i9dQZF1FOWu8jolY8N3P?utm_source=generator',
+    'https://open.spotify.com/embed/playlist/37i9dQZF1FwUbD6Jsl7VNR?utm_source=generator&si=9a943d8ce8064975',
   displayName: 'Chill Calm R&B',
 };

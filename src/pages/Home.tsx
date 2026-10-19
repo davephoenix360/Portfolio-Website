@@ -80,7 +80,7 @@ const About: React.FC = () => {
       className="section-shell"
       initial={reducedMotion ? false : { opacity: 0, y: 12 }}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-15% 0px' }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
@@ -166,7 +166,7 @@ const Projects: React.FC = () => {
       className="section-shell"
       initial={reducedMotion ? false : { opacity: 0, y: 12 }}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-15% 0px' }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
@@ -187,7 +187,7 @@ const Projects: React.FC = () => {
             key={project.id}
             initial={reducedMotion ? false : { opacity: 0, y: 12 }}
             whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-10% 0px' }}
+            viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.4, delay: i * 0.05 }}
             className={`card-surface group flex flex-col gap-4 transition hover:border-gold/40 ${
               project.featured ? 'md:col-span-2' : ''
@@ -264,7 +264,7 @@ const Experience: React.FC = () => {
       className="section-shell"
       initial={reducedMotion ? false : { opacity: 0, y: 12 }}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-15% 0px' }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
@@ -283,7 +283,7 @@ const Experience: React.FC = () => {
             key={i}
             initial={reducedMotion ? false : { opacity: 0, x: -8 }}
             whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-10% 0px' }}
+            viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.4, delay: i * 0.05 }}
             className="relative"
           >
@@ -332,7 +332,7 @@ const Contact: React.FC = () => {
       className="section-shell"
       initial={reducedMotion ? false : { opacity: 0, y: 12 }}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-15% 0px' }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>

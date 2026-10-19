@@ -114,7 +114,7 @@ const CharacterSheet: React.FC<Props> = ({ skillGroups }) => {
       className="section-shell"
       initial={reducedMotion ? false : { opacity: 0, y: 12 }}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-15% 0px' }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5 }}
     >
       <div>
@@ -168,7 +168,7 @@ const CharacterSheet: React.FC<Props> = ({ skillGroups }) => {
                   className="rpg-bar-fill"
                   initial={reducedMotion ? false : { width: 0 }}
                   whileInView={reducedMotion ? undefined : { width: `${pct}%` }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 1.2, ease: 'easeOut' }}
                 />
               </div>
@@ -247,7 +247,7 @@ const CharacterSheet: React.FC<Props> = ({ skillGroups }) => {
                 whileInView={
                   reducedMotion ? undefined : { width: `${prof(group.items.length)}%` }
                 }
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 1, ease: 'easeOut' }}
               />
             </div>

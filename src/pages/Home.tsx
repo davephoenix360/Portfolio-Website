@@ -252,7 +252,7 @@ const Projects: React.FC = () => {
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-xs uppercase tracking-wide2 text-gold transition hover:text-goldSoft"
+                    className="-m-1.5 inline-flex items-center gap-1 rounded-md p-2.5 font-mono text-xs uppercase tracking-wide2 text-gold transition hover:bg-gold/10 hover:text-goldSoft"
                   >
                     {link.label} <span aria-hidden>↗</span>
                   </a>
